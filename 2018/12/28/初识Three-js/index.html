@@ -13,7 +13,7 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>three.js笔记 | 墨夜</title>
+  <title>初识three.js | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="WebGLJavaScript">
@@ -21,19 +21,19 @@
   
   
   
-  <meta name="description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
+  <meta name="description" content="什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
 <meta name="keywords" content="WebGL,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Three.js笔记">
+<meta property="og:title" content="初识Three.js">
 <meta property="og:url" content="inknight.cn/2018/12/28/初识Three-js/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
+<meta property="og:description" content="什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/p33459861_p0.jpg">
-<meta property="og:updated_time" content="2018-12-31T14:24:42.241Z">
+<meta property="og:updated_time" content="2018-12-31T14:26:32.214Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Three.js笔记">
-<meta name="twitter:description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
+<meta name="twitter:title" content="初识Three.js">
+<meta name="twitter:description" content="什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/p33459861_p0.jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -178,7 +178,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      Three.js笔记
+      初识Three.js
     </h1>
   
 
@@ -198,7 +198,7 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Three-js初识"><a href="#Three-js初识" class="headerlink" title="Three.js初识"></a>Three.js初识</h1><blockquote>
+        <blockquote>
 <p>什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。<br><a id="more"></a></p>
 </blockquote>
 <h2 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建场景</span></span><br><span class="line">  <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 创建相机</span></span><br><span class="line">  <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">75</span>, <span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span><br><span class="line">  camera.position.z = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 创建并设置渲染器</span></span><br><span class="line">  <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123;<span class="attr">antialias</span>: <span class="literal">true</span>&#125;)</span><br><span class="line">  renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 创建物体添加到场景中</span></span><br><span class="line">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(<span class="keyword">new</span> THREE.CubeGeometry(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>), <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123;<span class="attr">color</span>: <span class="number">0x00ffff</span>&#125;))</span><br><span class="line">  scene.add(cube)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 5. 渲染</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置一个动画函数</span></span><br><span class="line">  <span class="keyword">var</span> animate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 一秒钟调用60次，也就是每秒60帧 绘制场景</span></span><br><span class="line">      requestAnimationFrame(animate)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 每次调用模型旋转</span></span><br><span class="line">      cube.rotation.x += <span class="number">0.01</span></span><br><span class="line">      cube.rotation.y += <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//渲染摄像机看见的场景</span></span><br><span class="line">      renderer.render(scene, camera)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  animate()</span><br></pre></td></tr></table></figure>
@@ -282,7 +282,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Three-js初识"><span class="nav-number">1.</span> <span class="nav-text">Three.js初识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HelloWorld"><span class="nav-number">1.1.</span> <span class="nav-text">HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要的三个组件"><span class="nav-number">1.2.</span> <span class="nav-text">必要的三个组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相机"><span class="nav-number">1.2.2.</span> <span class="nav-text">相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染器"><span class="nav-number">1.2.3.</span> <span class="nav-text">渲染器</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HelloWorld"><span class="nav-number">1.</span> <span class="nav-text">HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要的三个组件"><span class="nav-number">2.</span> <span class="nav-text">必要的三个组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">2.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相机"><span class="nav-number">2.2.</span> <span class="nav-text">相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染器"><span class="nav-number">2.3.</span> <span class="nav-text">渲染器</span></a></li></ol></li></ol>
     
     </div>
   </aside>

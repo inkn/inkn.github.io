@@ -13,23 +13,28 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>关于 | 墨夜</title>
+  <title>three.js笔记 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="WebGLJavaScript">
   
   
   
-  <meta name="description" content="正在学前端的菜鸟💦">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="inknight.cn/about/index.html">
+  
+  <meta name="description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
+<meta name="keywords" content="WebGL,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Three.js笔记">
+<meta property="og:url" content="inknight.cn/2018/12/28/初识Three-js/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="正在学前端的菜鸟💦">
+<meta property="og:description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-29T13:21:17.235Z">
+<meta property="og:image" content="https://inknight.cn/pic/img/p33459861_p0.jpg">
+<meta property="og:updated_time" content="2018-12-31T14:24:42.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="正在学前端的菜鸟💦">
+<meta name="twitter:title" content="Three.js笔记">
+<meta name="twitter:description" content="Three.js初识 什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。">
+<meta name="twitter:image" content="https://inknight.cn/pic/img/p33459861_p0.jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
   
@@ -79,7 +84,7 @@ var themeMenus = {};
 </script>
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   <header id="allheader" class="site-header" role="banner">
@@ -155,15 +160,25 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-初识Three-js" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/p33459861_p0.jpg" rel="gallery_cjqcf1b2o0002c4vc6lmm3cn7">
+        <img src="https://inknight.cn/pic/img/p33459861_p0.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
     
       <header class="article-header">
         
   
     <h1 class="thumb" itemprop="name">
-      about
+      Three.js笔记
     </h1>
   
 
@@ -171,6 +186,10 @@ var themeMenus = {};
     
     <div class="article-meta">
       
+	Posted on <a href="/2018/12/28/初识Three-js/" class="article-date">
+	  <time datetime="2018-12-28T14:08:15.000Z" itemprop="datePublished">十二月 28, 2018</time>
+	</a>
+
       
 	<span id="busuanzi_container_page_pv">
 	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
@@ -179,13 +198,40 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>正在学前端的菜鸟💦</p>
+        <h1 id="Three-js初识"><a href="#Three-js初识" class="headerlink" title="Three.js初识"></a>Three.js初识</h1><blockquote>
+<p>什么是Three.js，简单来看，Three是3D,js是JavaScript,也就是用JavaScript开发3D的页面。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建场景</span></span><br><span class="line">  <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 创建相机</span></span><br><span class="line">  <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">75</span>, <span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span><br><span class="line">  camera.position.z = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 创建并设置渲染器</span></span><br><span class="line">  <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123;<span class="attr">antialias</span>: <span class="literal">true</span>&#125;)</span><br><span class="line">  renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 创建物体添加到场景中</span></span><br><span class="line">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(<span class="keyword">new</span> THREE.CubeGeometry(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>), <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123;<span class="attr">color</span>: <span class="number">0x00ffff</span>&#125;))</span><br><span class="line">  scene.add(cube)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 5. 渲染</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置一个动画函数</span></span><br><span class="line">  <span class="keyword">var</span> animate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 一秒钟调用60次，也就是每秒60帧 绘制场景</span></span><br><span class="line">      requestAnimationFrame(animate)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 每次调用模型旋转</span></span><br><span class="line">      cube.rotation.x += <span class="number">0.01</span></span><br><span class="line">      cube.rotation.y += <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//渲染摄像机看见的场景</span></span><br><span class="line">      renderer.render(scene, camera)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  animate()</span><br></pre></td></tr></table></figure>
+<p>渲染结果：</p>
+<p><img src="https://i.loli.net/2018/12/27/5c24d3a9774fd.gif" alt=""></p>
+<h2 id="必要的三个组件"><a href="#必要的三个组件" class="headerlink" title="必要的三个组件"></a>必要的三个组件</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>创建场景：<code>var scene = new THREE.Scene()</code></p>
+<blockquote>
+<p>场景是所有物体的容器。</p>
+</blockquote>
+<h3 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h3><p>创建相机：<code>var camera = new THREE.PerspectiveCamera(视口角度, width/height, 视野最近距离, 视野最远距离)</code></p>
+<blockquote>
+<p>相机就像人的眼睛。</p>
+</blockquote>
+<h3 id="渲染器"><a href="#渲染器" class="headerlink" title="渲染器"></a>渲染器</h3><ul>
+<li>创建渲染器：<code>var renderer = new THREE.WebGLRenderer()</code></li>
+<li>设置渲染器画布大小：<code>renderer.setSize(width, height)</code></li>
+<li>画布添加到页面中：<code>documment.body.appendChild(render.domElement)</code><blockquote>
+<p>渲染器就像视觉神经，缺少它，我们什么也看不见。</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Three-js/">Three.js</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGL/">WebGL</a></li></ul>
+
       
             
       
@@ -217,90 +263,30 @@ var themeMenus = {};
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/02/HTML笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTML笔记</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
 <!-- Table of Contents -->
 
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
     
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Three-js初识"><span class="nav-number">1.</span> <span class="nav-text">Three.js初识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HelloWorld"><span class="nav-number">1.1.</span> <span class="nav-text">HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要的三个组件"><span class="nav-number">1.2.</span> <span class="nav-text">必要的三个组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相机"><span class="nav-number">1.2.2.</span> <span class="nav-text">相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染器"><span class="nav-number">1.2.3.</span> <span class="nav-text">渲染器</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
 </section>
-          <aside id="sidebar">
-  
-    
-  <div class="widget_athemes_tabs">
-    <ul id="widget-tab" class="clearfix widget-tab-nav">
-      <li class="active"><a>最新文章</a></li>
-    </ul>
-    <div class="widget">
-      <ul>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-thumbnail">
-                <a href="/2018/12/28/初识Three-js/" title=""><img width="50" height="50" src="https://inknight.cn/pic/img/p33459861_p0.jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
-              </div>
-              <div class="widget-entry-summary">
-            
-
-              <h6 style="margin: 0;"><a href="/2018/12/28/初识Three-js/">Three.js笔记</a></h6>
-              <span>十二月 28, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-thumbnail">
-                <a href="/2018/10/02/HTML笔记/" title=""><img width="50" height="50" src="https://inknight.cn/pic/img/p29166434_p0.jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
-              </div>
-              <div class="widget-entry-summary">
-            
-
-              <h6 style="margin: 0;"><a href="/2018/10/02/HTML笔记/">HTML笔记</a></h6>
-              <span>十月 2, 2018</span>
-            </div>
-
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web前端/">Web前端</a><span class="category-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebGL/">WebGL</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
         
       </div>
       <footer id="footer" class="site-footer">

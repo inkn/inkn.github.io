@@ -30,7 +30,7 @@
 <meta property="og:description" content="什么是Three.js，简单来看，Three是3D的意思,js是JavaScript,也就是用JavaScript开发3D的应用程序。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/p33459861_p0.jpg">
-<meta property="og:updated_time" content="2019-01-04T12:51:59.729Z">
+<meta property="og:updated_time" content="2019-01-04T12:59:01.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Three.js">
 <meta name="twitter:description" content="什么是Three.js，简单来看，Three是3D的意思,js是JavaScript,也就是用JavaScript开发3D的应用程序。">
@@ -205,18 +205,18 @@ var themeMenus = {};
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 创建场景</span></span><br><span class="line"><span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 创建相机</span></span><br><span class="line"><span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">75</span>, <span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span><br><span class="line">camera.position.z = <span class="number">5</span>   <span class="comment">//设置相机位置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 创建并设置渲染器</span></span><br><span class="line"><span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123;<span class="attr">antialias</span>: <span class="literal">true</span>&#125;) </span><br><span class="line">renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(renderer.domElement)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 创建网格模型添加到场景中</span></span><br><span class="line"><span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(<span class="keyword">new</span> THREE.CubeGeometry(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>), <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123;<span class="attr">color</span>: <span class="number">0x00ffff</span>&#125;))</span><br><span class="line">scene.add(cube)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5. 渲染</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置一个动画函数</span></span><br><span class="line"><span class="keyword">var</span> animate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 在浏览器下次重绘前执行回调函数 回调的次数通常是每秒60次  也就是常说的FPS 是60</span></span><br><span class="line">    requestAnimationFrame(animate)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模型旋转</span></span><br><span class="line">    cube.rotation.x += <span class="number">0.01</span></span><br><span class="line">    cube.rotation.y += <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//渲染摄像机看见的场景</span></span><br><span class="line">    renderer.render(scene, camera)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">animate()</span><br></pre></td></tr></table></figure>
 <p>渲染结果：</p>
 <p><img src="https://i.loli.net/2018/12/27/5c24d3a9774fd.gif" alt=""></p>
-<h2 id="必要的三个组件"><a href="#必要的三个组件" class="headerlink" title="必要的三个组件"></a>必要的三个组件</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>创建场景：<code>var scene = new THREE.Scene()</code></p>
+<h2 id="必要的三个组件"><a href="#必要的三个组件" class="headerlink" title="必要的三个组件"></a>必要的三个组件</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>创建场景：<br><br><code>var scene = new THREE.Scene()</code></p>
 <blockquote>
 <p>场景是所有物体的容器。</p>
 </blockquote>
-<h3 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h3><p>创建相机：<code>var camera = new THREE.PerspectiveCamera(视口角度, width/height, 视野最近距离, 视野最远距离)</code><br><img src="https://nos.netease.com/cloud-website-bucket/201809271025363f22144e-553d-4de9-af31-4ab884924e84.png" alt="PerspectiveCamera"></p>
+<h3 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h3><p>创建相机：<br><br><code>var camera = new THREE.PerspectiveCamera(视口角度, width/height, 视野最近距离, 视野最远距离)</code><br><img src="https://nos.netease.com/cloud-website-bucket/201809271025363f22144e-553d-4de9-af31-4ab884924e84.png" alt="PerspectiveCamera"></p>
 <blockquote>
 <p>相机就像人的眼睛。</p>
 </blockquote>
 <h3 id="渲染器"><a href="#渲染器" class="headerlink" title="渲染器"></a>渲染器</h3><ul>
-<li>创建渲染器：<code>var renderer = new THREE.WebGLRenderer()</code></li>
-<li>设置渲染区域尺寸：<code>renderer.setSize(width, height)</code></li>
-<li>画布添加到页面中：<code>documment.body.appendChild(render.domElement)</code><blockquote>
+<li>创建渲染器：<br><br><code>var renderer = new THREE.WebGLRenderer()</code></li>
+<li>设置渲染区域尺寸：<br><br><code>renderer.setSize(width, height)</code></li>
+<li>画布添加到页面中：<br><br><code>documment.body.appendChild(render.domElement)</code><blockquote>
 <p>渲染器就像视觉神经，缺少它，我们什么也看不见。</p>
 </blockquote>
 </li>

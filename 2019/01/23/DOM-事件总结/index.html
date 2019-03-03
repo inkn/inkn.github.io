@@ -30,7 +30,7 @@
 <meta property="og:description" content="事件是 JavaScript 与 HTML 交互的基础。要实现用户与页面的交互，先要对目标元素绑定特定的事件、设置事件处理函数，然后用户触发事件，事件处理函数执行，产生交互效果。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/p51166367_p0.jpg">
-<meta property="og:updated_time" content="2019-01-28T03:22:28.013Z">
+<meta property="og:updated_time" content="2019-03-03T01:31:43.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM 事件详解">
 <meta name="twitter:description" content="事件是 JavaScript 与 HTML 交互的基础。要实现用户与页面的交互，先要对目标元素绑定特定的事件、设置事件处理函数，然后用户触发事件，事件处理函数执行，产生交互效果。">
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/p51166367_p0.jpg" rel="gallery_cjr99tn0x0001d4vc7f3nj8qp">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/p51166367_p0.jpg" rel="gallery_cjssutsf0000rpovcwhej5j9p">
         <img src="https://inknight.cn/pic/img/p51166367_p0.jpg" itemprop="image">
       </a>
     
@@ -205,14 +205,14 @@ var themeMenus = {};
 <ol>
 <li><strong>DOM0 级事件</strong></li>
 </ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    var btn = document.getElementById('btn')</span></span><br><span class="line"><span class="undefined">    btn.onclick = function() &#123;</span></span><br><span class="line"><span class="undefined">        console.log('Hello World')</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    // btn.onclick = null // 解绑事件</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>)</span></span><br><span class="line"><span class="javascript">    btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'Hello World'</span>)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// btn.onclick = null // 解绑事件</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>缺点：无法设置多个事件处理函数</p>
 </blockquote>
 <ol start="2">
 <li><strong>DOM2 级事件</strong></li>
 </ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    var btn = document.getElementById('btn');    </span></span><br><span class="line"><span class="undefined">    btn.addEventListener('click', showFn, false)</span></span><br><span class="line"><span class="undefined">    btn.addEventListener('click', showFn2, false)</span></span><br><span class="line"><span class="undefined">    // btn.removeEventListener('click', showFn, false) // 解绑事件 </span></span><br><span class="line"><span class="undefined">    function showFn() &#123;</span></span><br><span class="line"><span class="undefined">        alert('Hello World');</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">     function showFn2() &#123;</span></span><br><span class="line"><span class="undefined">        alert('Hello World2');</span></span><br><span class="line"><span class="undefined">    &#125; </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"button"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);    </span></span><br><span class="line"><span class="javascript">    btn.addEventListener(<span class="string">'click'</span>, showFn, <span class="literal">false</span>)</span></span><br><span class="line"><span class="javascript">    btn.addEventListener(<span class="string">'click'</span>, showFn2, <span class="literal">false</span>)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// btn.removeEventListener('click', showFn, false) // 解绑事件 </span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">showFn</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">'Hello World'</span>);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">     <span class="function"><span class="keyword">function</span> <span class="title">showFn2</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">'Hello World2'</span>);</span></span><br><span class="line"><span class="undefined">    &#125; </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>可以为事件设置多个事件处理函数，可以通过第三个参数 ( useCapture ) 设置在什么阶段执行事件处理函数，默认是 false， 即在事件冒泡阶段执行事件处理函数。</p>
 </blockquote>
@@ -237,7 +237,7 @@ var themeMenus = {};
 <h2 id="DOM-事件流"><a href="#DOM-事件流" class="headerlink" title="DOM 事件流"></a>DOM 事件流</h2><blockquote>
 <p>想象画在一张纸上的一组同心圆。如果把手指放在圆心上，那么手指指向的不仅仅是一个圆，而是纸上的所有圆。所以如果点击了某个按钮，点击事件不仅仅发生在这个按钮上，整个页面也被点击了。</p>
 </blockquote>
-<p>事件流又称为事件传播，描述的是从页面中接收事件的顺序。DOM2 级事件规定事件流包括三个阶段: <strong>事件捕获(capture phase)</strong>、<strong>目标事件(target phase)</strong>、<strong>事件冒泡(bubblingphase)</strong>。<br><br><br>发生的顺序是：事件捕获阶段 –&gt; 目标事件阶段 –&gt; 事件冒泡阶段 </p>
+<p>事件流又称为事件传播，描述的是从页面中接收事件的顺序。DOM2 级事件规定事件流包括三个阶段: <strong>事件捕获(capturing phase)</strong>、<strong>目标事件(target phase)</strong>、<strong>事件冒泡(bubbling phase)</strong>。<br><br><br>发生的顺序是：事件捕获阶段 –&gt; 目标事件阶段 –&gt; 事件冒泡阶段 </p>
 <p><img src="https://user-gold-cdn.xitu.io/2019/1/26/16888253af0a50ca?w=534&amp;h=566&amp;f=png&amp;s=67676" alt="事件流"></p>
 <h3 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h3><blockquote>
 <p>事件开始时由最具体的元素(目标元素)接收，然后逐级向上传播。</p>
@@ -482,6 +482,15 @@ var themeMenus = {};
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/03/03/网络协议/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          网络协议总结
+        
+      </div>
+    </a>
   
   
     <a href="/2019/01/22/CSS盒模型分析/" id="article-nav-older" class="article-nav-link-wrap">

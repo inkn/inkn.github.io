@@ -16,13 +16,13 @@
   <title>网络协议总结 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="HTTPUDP与TCP">
+  <meta name="keywords" content="基础总结计算机网络">
   
   
   
   
   <meta name="description" content="前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。">
-<meta name="keywords" content="HTTP,UDP与TCP">
+<meta name="keywords" content="基础总结,计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络协议总结">
 <meta property="og:url" content="inknight.cn/2019/03/03/网络协议/index.html">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade9.jpg">
-<meta property="og:updated_time" content="2019-03-03T11:50:38.275Z">
+<meta property="og:updated_time" content="2019-03-04T13:13:32.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络协议总结">
 <meta name="twitter:description" content="前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。">
@@ -203,7 +203,7 @@ var themeMenus = {};
 </blockquote>
 <a id="more"></a>
 <h2 id="OSI-参考模型-与-TCP-IP-五层模型"><a href="#OSI-参考模型-与-TCP-IP-五层模型" class="headerlink" title="OSI 参考模型 与 TCP/IP 五层模型"></a>OSI 参考模型 与 TCP/IP 五层模型</h2><p><img src="https://inknight.cn/pic/note/网络分层模型.png" alt="网络分层模型"></p>
-<p>我们主要关注于 <strong>应用层</strong> 和 <strong>传输层</strong> 就足够了。</p>
+<p>我们主要关注于 <code>TCP/IP 五层模型</code> 的 <strong>应用层</strong> 和 <strong>传输层</strong> 就足够了。</p>
 <p><strong>应用层:</strong></p>
 <ul>
 <li>作用：为应用程序提供服务。</li>
@@ -236,16 +236,131 @@ var themeMenus = {};
 <p><strong><em>第一次握手：</em></strong> <br></p>
 <p><strong>客户端</strong>向<strong>服务端</strong>发送一个 <strong>SYN</strong>（Seq=X） 包，客户端进入 <code>SYN-SENT</code> 状态，等待<strong>服务端</strong>的 <strong>ACK</strong>（Ack=X+1）回复。<br>ps: Seq 是序号，Ack 是确认序号。</p>
 <p><strong><em>第二次握手：</em></strong> <br></p>
-<p><strong>服务端</strong>根据接收到<strong>客户端</strong>发来的 <strong>SYN</strong>（Seq=X） 包后返回一个 <strong>ACK</strong>（Ack=X+1） 包以及 <strong>SYN</strong>（Seq=Y） 包给<strong>客户端</strong>，<strong>服务端</strong>进入 <code>SYN-RECIVED</code> 状态，等待<strong>客户端</strong>的 <strong>ACK</strong>（Ack=Y+1） 回复。</p>
-<p><strong><em>第三次握手：</em></strong><br><strong>客户端</strong>接收到 <strong>ACK</strong>（X+1） 包后，进入 <code>ESTABLISHED</code> 状态。根据<strong>服务端</strong>发来的 <strong>SYN</strong>（Y） 包返回一个 <strong>ACK</strong>（Y+1） 包给<strong>服务端</strong>。<br><strong>服务端</strong> 接收 <strong>ACK</strong>（Y+1）后进入 <code>ESTABLISHED</code> 状态。此时连接建立成功。</p>
+<p><strong>服务端</strong>根据接收到<strong>客户端</strong>发来的 <strong>SYN</strong>（Seq=X） 包后返回一个 <strong>ACK</strong>（Ack=X+1） 以及 <strong>SYN</strong>（Seq=Y） 包给<strong>客户端</strong>，<strong>服务端</strong>进入 <code>SYN-RECIVED</code> 状态，等待<strong>客户端</strong>的 <strong>ACK</strong>（Ack=Y+1） 回复。</p>
+<p><strong><em>第三次握手：</em></strong></p>
+<p><strong>客户端</strong>接收到 <strong>ACK</strong>（X+1） 后，进入 <code>ESTABLISHED</code> 状态。根据<strong>服务端</strong>发来的 <strong>SYN</strong>（Y） 返回一个 <strong>ACK</strong>（Y+1） 包给<strong>服务端</strong>。<br><strong>服务端</strong> 接收 <strong>ACK</strong>（Y+1）后进入 <code>ESTABLISHED</code> 状态。此时连接建立成功。</p>
 <blockquote>
 <p>这个过程可以用以下三句形象表示：</p>
 <ol>
-<li>(客户端)：我要建立连接了，服务端你准备好没有呀？</li>
+<li>(客户端)：我想建立连接了，服务端你准备好没有呀？</li>
 <li>(服务端)：我准备好了，你准备好没有？</li>
-<li>(客户端)：我也准备好了，开始嘛~</li>
+<li>(客户端)：我也准备好了，开始吧~</li>
 </ol>
 </blockquote>
+<h4 id="TCP-关闭连接四次挥手"><a href="#TCP-关闭连接四次挥手" class="headerlink" title="TCP 关闭连接四次挥手"></a>TCP 关闭连接四次挥手</h4><p><img src="https://inknight.cn/pic/note/四次挥手.png" alt="四次挥手"></p>
+<blockquote>
+<p>这个过程可以用以下四句句形象表示：</p>
+<ol>
+<li>(客户端)：我想关闭连接了，服务端你好没有？</li>
+<li>(服务端)：我知道了。</li>
+<li>(服务端端)：我现在准备关闭连接了，ok 不？</li>
+<li>(客户端)：ok，你关闭吧。</li>
+</ol>
+</blockquote>
+<h3 id="UDP-与-TCP-的区别"><a href="#UDP-与-TCP-的区别" class="headerlink" title="UDP 与 TCP 的区别"></a>UDP 与 TCP 的区别</h3><ul>
+<li>UDP 协议是面向无连接的，它不能保证数据有序且不丢失的传到对端，但是 UDP 比 TCP 更高效。</li>
+<li>TCP 协议是面向有连接的，建立和断开连接都需要握手，在传输数据的过程中，通过<strong>滑动窗口</strong>（流量控制）、拥塞处理（慢开始，拥塞避免，快速重传，快速恢复），能够正确处理丢包问题，保证接收方能够收到数据，与此同时还能够有效利用网络带宽。</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><blockquote>
+<p>HTTP (HyperText Transfer Protocol) <strong>超文本传输协议</strong> 是一个基于 TCP (传输层) 的应用层协议，是客户端与服务端之间请求和响应的标准。</p>
+</blockquote>
+<h3 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h3><ul>
+<li>简单快速<blockquote>
+<p>客户端向服务器请求服务时，只需请求方法和请求路径。</p>
+</blockquote>
+</li>
+<li>无状态<blockquote>
+<p>客户端再次向服务器请求服务时，服务器并不知道客户端之前是否请求过。</p>
+</blockquote>
+</li>
+<li>无连接<blockquote>
+<p>每次请求都会建立一个 TCP 连接，请求处理完成后连接断开。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h3><p><img src="https://inknight.cn/pic/note/HTTP报文.png" alt="HTTP报文"></p>
+<p>请求行：</p>
+<blockquote>
+<p><code>GET https://www.baidu.com/ HTTP/1.1</code> 由请求方法、URL、协议版本组成</p>
+</blockquote>
+<p>响应行： </p>
+<blockquote>
+<p><code>HTTP/1.1 200 OK</code><br>协议版本、状态码、状态信息组成</p>
+</blockquote>
+<h3 id="HTTP-请求方法"><a href="#HTTP-请求方法" class="headerlink" title="HTTP 请求方法"></a>HTTP 请求方法</h3><p>请求方法分为很多种，最常用的也就是 <code>GET</code> 和 <code>POST</code> 了。虽然请求方法很多，但更多的是为了传达语义。更多的方法的语义描述可以阅读 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods" target="_blank" rel="noopener">文档</a> 。</p>
+<h3 id="GET-和-POST-的区别"><a href="#GET-和-POST-的区别" class="headerlink" title="GET 和 POST 的区别"></a>GET 和 POST 的区别</h3><ul>
+<li>GET<blockquote>
+<p>能缓存、请求长度限制、 有历史记录</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>在规范的应用场景上，<code>GET</code> 多用于 <strong>无副作用</strong>(不修改资源)、<strong>幂等</strong>(请求次数与资源无关)的场景。</p>
+</blockquote>
+<ul>
+<li>POST<blockquote>
+<p><code>POST</code> 相对 <code>GET</code> 安全一点点，因为 <code>GET</code> 请求发送的数据包含在 URL 里。</p>
+</blockquote>
+</li>
+</ul>
+<p>两者详细对比：<br><img src="https://inknight.cn/pic/note/GET与POST.png" alt="GET与POST"></p>
+<h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><blockquote>
+<p>状态码表示了响应的状态，可以让我们知道这一次的请求是成功还是失败，如果失败，是什么原因导致的。</p>
+</blockquote>
+<p><strong>2XX  成功</strong></p>
+<ul>
+<li>200 OK ，请求成功并返回数据</li>
+<li>204 No Content ，成功但无内容</li>
+<li>206 Partial Content ,范围请求</li>
+</ul>
+<p><strong>3XX  重定向</strong></p>
+<ul>
+<li>301 永久重定向，表示资源已被分配了新的 URL</li>
+<li>302 临时重定向，资源临时被分配新的 URL</li>
+<li>304 资源未修改，可使用缓存</li>
+</ul>
+<p><strong>4XX  客户端错误</strong></p>
+<ul>
+<li>400 请求语法错误</li>
+<li>401 要求身份认证</li>
+<li>403 请求被服务器拒绝</li>
+<li>404 资源不存在</li>
+</ul>
+<p><strong>5XX  服务器错误</strong></p>
+<ul>
+<li>500 服务器错误</li>
+<li>503 服务器超负载或停机维护</li>
+</ul>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><blockquote>
+<p>更安全的网络传输协议</p>
+</blockquote>
+<ul>
+<li>需要安装证书（公钥）</li>
+<li>经过 SSL/TLS 协议 加密，传输的内容是经过加密的</li>
+<li>使用 443 端口</li>
+</ul>
+<h3 id="HTTP-2"><a href="#HTTP-2" class="headerlink" title="HTTP/2"></a>HTTP/2</h3><ul>
+<li><p>多路复用</p>
+<blockquote>
+<p>在同一个 TCP 连接上传输所有的请求数据，避免 队头阻塞(浏览器限制同一个域名下的连接数)问题</p>
+</blockquote>
+</li>
+<li><p>Header 压缩</p>
+<blockquote>
+<p>使用了 HPACK 压缩格式对传输的 header 进行<strong>编码</strong>，减少了 header 的大小。并在两端维护了<strong>索引表</strong>，用于记录出现过的 header ，避免 header 重复传输。</p>
+</blockquote>
+</li>
+<li><p>二进制传输</p>
+<blockquote>
+<p>在之前的 HTTP 版本中，我们是通过文本的方式传输数据。在 HTTP/2 中引入了新的编码机制，所有传输的数据都会被分割，并采用二进制格式编码。 </p>
+</blockquote>
+</li>
+<li><p>服务端推送</p>
+<blockquote>
+<p>服务端可以在客户端的某个请求后，主动推送其他客户端在之后会用到的资源。省去了客户端重复请求的步骤，降低了延迟。</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -256,7 +371,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UDP与TCP/">UDP与TCP</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础总结/">基础总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
 
       
             
@@ -308,7 +423,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-参考模型-与-TCP-IP-五层模型"><span class="nav-number">1.</span> <span class="nav-text">OSI 参考模型 与 TCP/IP 五层模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-与-TCP"><span class="nav-number">2.</span> <span class="nav-text">UDP 与 TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP"><span class="nav-number">2.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">2.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-建立连接三次握手"><span class="nav-number">2.2.1.</span> <span class="nav-text">TCP 建立连接三次握手</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-参考模型-与-TCP-IP-五层模型"><span class="nav-number">1.</span> <span class="nav-text">OSI 参考模型 与 TCP/IP 五层模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-与-TCP"><span class="nav-number">2.</span> <span class="nav-text">UDP 与 TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP"><span class="nav-number">2.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">2.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-建立连接三次握手"><span class="nav-number">2.2.1.</span> <span class="nav-text">TCP 建立连接三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-关闭连接四次挥手"><span class="nav-number">2.2.2.</span> <span class="nav-text">TCP 关闭连接四次挥手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-与-TCP-的区别"><span class="nav-number">2.3.</span> <span class="nav-text">UDP 与 TCP 的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">3.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要特点"><span class="nav-number">3.1.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-报文"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP 报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-请求方法"><span class="nav-number">3.3.</span> <span class="nav-text">HTTP 请求方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET-和-POST-的区别"><span class="nav-number">3.4.</span> <span class="nav-text">GET 和 POST 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码"><span class="nav-number">3.5.</span> <span class="nav-text">状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">3.6.</span> <span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-2"><span class="nav-number">3.7.</span> <span class="nav-text">HTTP/2</span></a></li></ol></li></ol>
     
     </div>
   </aside>

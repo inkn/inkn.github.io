@@ -30,7 +30,7 @@
 <meta property="og:description" content="前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade9.jpg">
-<meta property="og:updated_time" content="2019-03-04T13:13:32.267Z">
+<meta property="og:updated_time" content="2019-03-06T00:28:46.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络协议总结">
 <meta name="twitter:description" content="前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。">
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade9.jpg" rel="gallery_cjssutsde0002povced07f1ej">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade9.jpg" rel="gallery_cjswp1o1h0008j4vckuls6e72">
         <img src="https://inknight.cn/pic/img/Ghostblade9.jpg" itemprop="image">
       </a>
     
@@ -251,15 +251,15 @@ var themeMenus = {};
 <blockquote>
 <p>这个过程可以用以下四句句形象表示：</p>
 <ol>
-<li>(客户端)：我想关闭连接了，服务端你好没有？</li>
+<li>(客户端)：我想关闭连接了。</li>
 <li>(服务端)：我知道了。</li>
-<li>(服务端端)：我现在准备关闭连接了，ok 不？</li>
+<li>(服务端)：我现在准备关闭连接了，ok 吗？</li>
 <li>(客户端)：ok，你关闭吧。</li>
 </ol>
 </blockquote>
 <h3 id="UDP-与-TCP-的区别"><a href="#UDP-与-TCP-的区别" class="headerlink" title="UDP 与 TCP 的区别"></a>UDP 与 TCP 的区别</h3><ul>
 <li>UDP 协议是面向无连接的，它不能保证数据有序且不丢失的传到对端，但是 UDP 比 TCP 更高效。</li>
-<li>TCP 协议是面向有连接的，建立和断开连接都需要握手，在传输数据的过程中，通过<strong>滑动窗口</strong>（流量控制）、拥塞处理（慢开始，拥塞避免，快速重传，快速恢复），能够正确处理丢包问题，保证接收方能够收到数据，与此同时还能够有效利用网络带宽。</li>
+<li>TCP 协议是面向有连接的，建立和断开连接都需要握手，在传输数据的过程中，通过<strong>滑动窗口</strong>（流量控制）、<strong>拥塞处理</strong>（慢开始，拥塞避免，快速重传，快速恢复），能够正确处理丢包问题，保证接收方能够收到数据，与此同时还能够有效利用网络带宽。</li>
 </ul>
 <h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><blockquote>
 <p>HTTP (HyperText Transfer Protocol) <strong>超文本传输协议</strong> 是一个基于 TCP (传输层) 的应用层协议，是客户端与服务端之间请求和响应的标准。</p>
@@ -295,7 +295,7 @@ var themeMenus = {};
 </li>
 </ul>
 <blockquote>
-<p>在规范的应用场景上，<code>GET</code> 多用于 <strong>无副作用</strong>(不修改资源)、<strong>幂等</strong>(请求次数与资源无关)的场景。</p>
+<p><code>GET</code> 多用于 <strong>无副作用</strong>(不修改资源)、<strong>幂等</strong>(请求次数与资源无关)的场景。</p>
 </blockquote>
 <ul>
 <li>POST<blockquote>
@@ -405,6 +405,15 @@ var themeMenus = {};
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/03/05/JavaScript-中的变量类型和类型转换/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JavaScript 中的变量类型和类型转换
+        
+      </div>
+    </a>
   
   
     <a href="/2019/01/23/DOM-事件总结/" id="article-nav-older" class="article-nav-link-wrap">

@@ -21,19 +21,19 @@
   
   
   
-  <meta name="description" content="JavaScript 是一种弱类型或者说动态类型语言。这意味着你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
+  <meta name="description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 中的变量类型和类型转换">
 <meta property="og:url" content="inknight.cn/2019/03/05/JavaScript-中的变量类型和类型转换/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="JavaScript 是一种弱类型或者说动态类型语言。这意味着你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
+<meta property="og:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(30).jpg">
-<meta property="og:updated_time" content="2019-03-06T23:48:46.015Z">
+<meta property="og:updated_time" content="2019-03-07T23:47:21.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 中的变量类型和类型转换">
-<meta name="twitter:description" content="JavaScript 是一种弱类型或者说动态类型语言。这意味着你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
+<meta name="twitter:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(30).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(30).jpg" rel="gallery_cjswp1o2c000sj4vchpbo3nwp">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(30).jpg" rel="gallery_cjszpcpt8000ncgvceqqso8zp">
         <img src="https://inknight.cn/pic/img/Ghostblade%20(30).jpg" itemprop="image">
       </a>
     
@@ -199,7 +199,7 @@ var themeMenus = {};
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>JavaScript 是一种<strong>弱类型</strong>或者说<strong>动态类型</strong>语言。这意味着你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。</p>
+<p>JavaScript 是一种<strong>弱类型</strong>或者说<strong>动态类型</strong>语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h3><p>在 JS 中一共 6 种原始类型：</p>
@@ -209,7 +209,7 @@ var themeMenus = {};
 <li>boolean</li>
 <li>undefined</li>
 <li>null</li>
-<li>symbol (ECMAScript 6)</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Symbol" target="_blank" rel="noopener">symbol</a> (ECMAScript 6)</li>
 </ul>
 <h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><blockquote>
 <p>除了原始类型其他的都是对象类型（object）了。</p>
@@ -261,8 +261,8 @@ var themeMenus = {};
 <ul>
 <li><p>原始类型 —&gt; 字符串</p>
 </li>
-<li><p>对象 —&gt; 字符串<br>数组会返回该数组的字符串形式，其他的返回一个类型字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// '[object Object]'</span></span><br><span class="line"><span class="built_in">String</span>([<span class="number">1</span>,<span class="number">2</span>])  <span class="comment">// '1,2'</span></span><br><span class="line">string([])  <span class="comment">// ''</span></span><br></pre></td></tr></table></figure>
+<li><p>对象 —&gt; 字符串<br>数组会返回该数组的字符串形式，函数返回完整函数的字符串，其他的返回一个类型字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// '[object Object]'</span></span><br><span class="line"><span class="built_in">String</span>([<span class="number">1</span>,<span class="number">2</span>])  <span class="comment">// '1,2'</span></span><br><span class="line">string([])  <span class="comment">// ''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x*x &#125;</span><br><span class="line"><span class="built_in">String</span>(foo)  <span class="comment">//  'function foo(x)&#123; return x*x &#125;'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><strong><code>String(对象)</code></strong> 方法的转换规则与 <strong><code>Number(对象)</code></strong> 基本相同，只是互换了 <strong><code>valueOf()</code></strong> 与 <strong><code>toString()</code></strong> 的执行顺序。</p>
@@ -275,9 +275,6 @@ var themeMenus = {};
 <h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a><strong><code>Boolean()</code></strong></h4><blockquote>
 <p><code>Boolean()</code> 函数可以将任意类型转换成布尔值<br>除了以下五个值转换结果为 <code>false</code> ，其他值全部转换为 <code>true</code></p>
 </blockquote>
-<blockquote>
-<p><code>!!数据</code> 与 <code>Boolean(数据)</code> 效果一样。</p>
-</blockquote>
 <ul>
 <li><code>undefined</code></li>
 <li><code>null</code></li>
@@ -285,15 +282,18 @@ var themeMenus = {};
 <li><code>-0</code> 或 <code>0</code></li>
 <li><code>NaN</code></li>
 </ul>
+<blockquote>
+<p><code>!!数据</code> 与 <code>Boolean(数据)</code> 效果一样。</p>
+</blockquote>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>)  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">! <span class="literal">NaN</span>  <span class="comment">// true</span></span><br><span class="line">!! <span class="literal">NaN</span>  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<h4 id="自动转换"><a href="#自动转换" class="headerlink" title="自动转换"></a>自动转换</h4><blockquote>
-<p>自动转换就是没有显式地用函数数据进行类型转换。但它是以强制转换为基础的。</p>
+<h3 id="自动转换"><a href="#自动转换" class="headerlink" title="自动转换"></a>自动转换</h3><blockquote>
+<p>自动转换就是没有显式地使用函数对数据进行类型转换。但它是以强制转换为基础的。</p>
 </blockquote>
 <p>当预期数值与实际数值不匹配时，JavaScript 就会自动调用预期类型的转换函数对实际值进行转换。</p>
-<h5 id="进行算术运算"><a href="#进行算术运算" class="headerlink" title="进行算术运算"></a>进行算术运算</h5><ul>
+<h4 id="进行算术运算"><a href="#进行算术运算" class="headerlink" title="进行算术运算"></a>进行算术运算</h4><ul>
 <li><p>运算子都是原始类型</p>
 <ul>
-<li>在加法运算中  只要一方时字符串，另一方就会转换成字符串。字符串拼接。</li>
+<li>在加法运算中  只要一方时字符串，另一方就会转换成字符串。这是字符串拼接。</li>
 <li>其他 <code>-</code> <code>*</code> <code>/</code> <code>**</code> <code>%</code> <code>++</code> <code>--</code> <code>+</code>(一元运算符 表示正数) <code>-</code>(一元运算符 表负数) 都会将运算子转换成数字。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="string">'1'</span>  <span class="comment">// '11'</span></span><br><span class="line"><span class="number">2</span> * <span class="string">'3'</span>  <span class="comment">// 6</span></span><br><span class="line"><span class="number">1</span> - <span class="string">'a'</span>  <span class="comment">// NaN  </span></span><br><span class="line"><span class="number">3</span> + - <span class="string">'1'</span>  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -301,9 +301,9 @@ var themeMenus = {};
 <li><p>运算子是对象</p>
 </li>
 </ul>
-<p>会先调用对象的 <strong><code>valueOf()</code></strong> 方法 试图将对象转换成原始类型，如果返回的是对象就再调用原对象的 <strong><code>toString()</code></strong> 方法。将对象转换成原始类型，如果返回的还是对象就报错。</p>
+<p>会先把对象转换成原始类型再按预期值转换。具体方法是：先调用对象的 <strong><code>valueOf()</code></strong> 方法试图将对象转换成原始类型，如果返回的是对象，就再调用原对象的 <strong><code>toString()</code></strong> 方法，如果返回的还是对象就报错。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'1'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'10'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">10</span> - obj  <span class="comment">// 9</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> + [<span class="number">1</span>,<span class="number">2</span>]  <span class="comment">// '11,2'</span></span><br><span class="line"><span class="comment">// [1,2].toString() ---&gt; '1,2'</span></span><br></pre></td></tr></table></figure>
-<h5 id="进行比较运算"><a href="#进行比较运算" class="headerlink" title="进行比较运算"></a>进行比较运算</h5><ul>
+<h4 id="进行比较运算"><a href="#进行比较运算" class="headerlink" title="进行比较运算"></a>进行比较运算</h4><ul>
 <li><code>===</code> 和 <code>!==</code> 不会发生类型转换，只要类型不同就返回 <code>false</code>.</li>
 <li>两边同时为字符串会比较 Unicode 码，否则都会转换成数字进行比较(null、undefined  除外)。</li>
 <li><code>NaN</code> 与任意值(包括本身<code>NaN</code>)比较都返回 <code>false</code> </li>
@@ -311,7 +311,7 @@ var themeMenus = {};
 </li>
 </ul>
 <p><code>==</code> 常用于判断函数的参数是否等于 <code>null</code> 或者 <code>undefined</code> ，因为 <code>null == undefinded</code> 返回 <code>true</code><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function fun(x) &#123;</span><br><span class="line">    if(x == null) &#123;···&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h5><ul>
+<h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><ul>
 <li><code>!参数</code> </li>
 <li><code>参数&amp;&amp;</code> </li>
 <li><code>参数||</code> </li>
@@ -364,6 +364,15 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
+    <a href="/2019/03/08/原型-原型链-继承/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          原型-原型链-继承
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/03/03/网络协议/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -381,7 +390,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始类型"><span class="nav-number">1.1.</span> <span class="nav-text">原始类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类型"><span class="nav-number">1.2.</span> <span class="nav-text">对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存空间"><span class="nav-number">1.3.</span> <span class="nav-text">内存空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typeof-与-instanceof"><span class="nav-number">2.</span> <span class="nav-text">typeof 与 instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">2.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制转换"><span class="nav-number">3.1.</span> <span class="nav-text">强制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">3.1.1.</span> <span class="nav-text">Number()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">3.1.2.</span> <span class="nav-text">String()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean"><span class="nav-number">3.1.3.</span> <span class="nav-text">Boolean()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动转换"><span class="nav-number">3.1.4.</span> <span class="nav-text">自动转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进行算术运算"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">进行算术运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进行比较运算"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">进行比较运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑运算"><span class="nav-number">3.1.4.3.</span> <span class="nav-text">逻辑运算</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始类型"><span class="nav-number">1.1.</span> <span class="nav-text">原始类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类型"><span class="nav-number">1.2.</span> <span class="nav-text">对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存空间"><span class="nav-number">1.3.</span> <span class="nav-text">内存空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typeof-与-instanceof"><span class="nav-number">2.</span> <span class="nav-text">typeof 与 instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">2.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制转换"><span class="nav-number">3.1.</span> <span class="nav-text">强制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">3.1.1.</span> <span class="nav-text">Number()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">3.1.2.</span> <span class="nav-text">String()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean"><span class="nav-number">3.1.3.</span> <span class="nav-text">Boolean()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动转换"><span class="nav-number">3.2.</span> <span class="nav-text">自动转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进行算术运算"><span class="nav-number">3.2.1.</span> <span class="nav-text">进行算术运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行比较运算"><span class="nav-number">3.2.2.</span> <span class="nav-text">进行比较运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算"><span class="nav-number">3.2.3.</span> <span class="nav-text">逻辑运算</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

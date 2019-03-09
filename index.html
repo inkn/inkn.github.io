@@ -177,75 +177,24 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>你就来看看这篇文章~</p>
-</blockquote>
-<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><h3 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h3><blockquote>
-<p>原型其实就是一个特殊的对象，在声明函数的时候自动创建的。</p>
-</blockquote>
-<p>比如，我们现在声明一个构造函数 A ，除了会申请保存函数的空间，还会额外申请一个内存空间，用于存储构造函数 A 的原型对象。<strong>所有函数中(Function.prototype.bind 除外)默认都有一个 <code>prototype</code> 的属性</strong>，它保存了函数的原型对象的<strong>地址(引用)</strong>(也就是它指向了原型对象)。<br>而在原型对象中默认有一个 <code>constructor</code> 属性存储了构造函数的<strong>地址(引用)</strong>(也就是 <code>constructor</code> 指向了构造函数)。如果不理解上面所说的，那我们看下面的图：</p>
-<p><img src="https://inknight.cn/pic/note/原型1.png" alt="原型"></p>
-<p>浏览器控制台中：</p>
-<p><img src="https://inknight.cn/pic/note/原型2.png" alt="原型"></p>
-<h3 id="proto-与-prototype"><a href="#proto-与-prototype" class="headerlink" title="_ _proto_ _ 与 prototype"></a><code>_ _proto_ _</code> 与 <code>prototype</code></h3><blockquote>
-<p>刚开始接触原型的时候这两个东西很容易就搞混了。</p>
-</blockquote>
-<p>先记住以下两点，就很容易就区分了：</p>
-<ul>
-<li><code>prototype</code> 是函数中才有的属性</li>
-<li><code>__proto__</code> 是所有对象都有的属性</li>
-</ul>
-<p><img src="https://inknight.cn/pic/note/原型3.png" alt=" _ _proto_ _ 与 prototye"></p>
-<p>我们已经知道了函数中的 <code>prototype</code> 属性指向的是它的原型对象，那么对象中的 <code>__proto__</code> 代表什么？</p>
-<p>一般情况下，<strong>对象中的 <code>__proto__</code>属性是指向它的构造函数的原型对象(<code>prototype</code>)的</strong>。</p>
-<p>用一段简单的代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://inknight.cn/pic/note/原型5(1" alt="">.png)</p>
-<p>上图看着不够简便，我们简化一下：</p>
-<p><img src="https://inknight.cn/pic/note/原型6(1" alt="">.png)</p>
-<blockquote>
-<p>还有一点，<code>__proto__</code> 不是一个规范属性，ie(除了 ie10) 不支持。对应的标准属性是 <code>[[Prototype]]</code> ，但是这个属性我们没法直接访问到。开发者尽量不要用这种方式去访问，因为操作不慎会改变这个对象的继承原型链。</p>
-</blockquote>
-<p>在使用 <code>Object.create(参数)</code> 方式创建对象时，对象的 <code>__proto__</code> 指向的时传入的参数。</p>
-<p><img src="https://inknight.cn/pic/note/原型7.png" alt=""></p>
-<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><blockquote>
-<p>由于 <code>__proto__</code> 是所有对象都具有的属性，而 <code>__proto__</code> 本身指向的<strong>原型</strong>(函数.prototype)也是一个对象，它也有 <code>__proto__</code> 属性。所以这样会形成由 <code>__proto__</code> 将<strong>对象</strong>和<strong>原型</strong>连起来的链条。这就是<strong>原型链</strong>。原型链的顶端是 <code>Object.prototype</code>（Object 是所有对象的祖宗） ，<code>Object.prototype.__proto__</code>的值为 <code>null</code> 。</p>
-</blockquote>
-<p>还是看之前的代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure></p>
-<p>它的原型链如下：<br><img src="https://inknight.cn/pic/note/原型链1.png" alt="原型链"></p>
-<p>构造函数 A 其实也是一个对象。<strong>所有函数都是由 <code>Function</code> 函数构造的</strong>。(声明函数 <code>function A() {}</code> 等价于 <code>var A = new Function()</code>) 。所以所有函数的 <code>__proto__</code> 指向的是 <code>Function.prototype</code> 。更新上图：<br><img src="https://inknight.cn/pic/note/原型链2.png" alt="原型链"></p>
-<p><code>Function</code> 也是一个函数，它的 <code>__proto__</code> 指向的也是 <code>Functon.prototype</code> 即 <code>Funtion.__proto__ === Function.prototype</code>。继更新上图：</p>
-<p><img src="https://inknight.cn/pic/note/原型链3.png" alt="原型链"></p>
-<p><code>Object</code> 同样是一个函数，所以 <code>Object.__proto__ === Function.prototype</code></p>
-<p>到了这里，我们应该可以看懂下面这张图了：</p>
-<p><img src="https://inknight.cn/pic/note/原型链4.png" alt="原型链"></p>
-<h3 id="原型的作用"><a href="#原型的作用" class="headerlink" title="原型的作用"></a>原型的作用</h3><blockquote>
-<p>当 JS 引擎查找对象属性时，先查找对象本身是否存在该属性，如果不存在，会沿着原型链一直找到<strong>原型链顶端(Object.prototype)</strong> 直到找到属性为止，最后在原型链顶端都没找到就返回 <code>undefined</code> 。</p>
-</blockquote>
-<p>由于上面的机制，原型的作用就很明显了——共享属性，节省内存空间。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'动物'</span></span><br><span class="line">    <span class="keyword">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'在吃···'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a1 = <span class="keyword">new</span> Animal()</span><br><span class="line"><span class="keyword">var</span> a2 = <span class="keyword">new</span> Animal()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a1.eat === a2.eat)  <span class="comment">// false</span></span><br><span class="line"><span class="comment">// 每个对象的 eat 方法不是同一个，但方法类容一样，浪费内存</span></span><br></pre></td></tr></table></figure>
-<p>使用 原型解决：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'动物'</span></span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'吃'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a1 = <span class="keyword">new</span> A()</span><br><span class="line"><span class="keyword">var</span> a2 = <span class="keyword">new</span> A()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a1.eat === a2.eat)  <span class="comment">//true</span></span><br><span class="line"><span class="comment">// a1.eat 和 a2.eat 都同一个方法(Animal.prototype.eat)</span></span><br></pre></td></tr></table></figure>
-<p>原型非常适合封装共享的方法。但是上面的代码把构造函数和原型分开写了。封装不到位。使用<strong>动态类型模式</strong>解决。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'动物'</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">      判断 this.eat 是不是 函数类型，</span></span><br><span class="line"><span class="comment">      如果不是，则表示是第一次创建对象或者调用 Animal 函数，</span></span><br><span class="line"><span class="comment">      会将 eat 添加到原型中去。</span></span><br><span class="line"><span class="comment">      如果是，则表示原型中存在了 eat 方法，不需要再添加。</span></span><br><span class="line"><span class="comment">      </span></span><br><span class="line"><span class="comment">      </span></span><br><span class="line"><span class="comment">    *?</span></span><br><span class="line"><span class="comment">    if(typeof this.eat !== 'function') &#123;</span></span><br><span class="line"><span class="comment">        Person.prototype.eat = function() &#123;</span></span><br><span class="line"><span class="comment">            console.log('吃')</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">var a = new Animal()</span></span><br><span class="line"><span class="comment">a.eat()</span></span><br></pre></td></tr></table></figure>
-<p>原型基于之前的共享属性和方法，是实现 JS 中继承的基础。</p>
-<h3 id="与原型有关的方法"><a href="#与原型有关的方法" class="headerlink" title="与原型有关的方法"></a>与原型有关的方法</h3><h4 id="hasOwnProperty-NaN"><a href="#hasOwnProperty-NaN" class="headerlink" title="hasOwnProperty()"></a><code>hasOwnProperty()</code></h4><p>通过之前的学习，我们知道了去访问一个对象的属性时，会在原型链上查找。所以我们并不知道这个属性来自哪里。</p>
-<p><code>hasOwnProperty()</code> 方法返回一个布尔值，可以判断一个属性是否来自对象本身。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Animal.prototype.name = <span class="string">'动物'</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Animal()</span><br><span class="line">a.age = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a.hasOwnProperty(<span class="string">'name'</span>))  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(a.hasOwnProperty(<span class="string">'age'</span>)  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h4 id="in-操作符"><a href="#in-操作符" class="headerlink" title="in 操作符"></a><code>in</code> 操作符</h4><blockquote>
-<p><code>in</code> 操作符用返回一个布尔值，用来判断一个属性能否在对象上找到。在对象的原型链上找到也返回 <code>true</code>。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function Animal() &#123;&#125;</span><br><span class="line">Animal.prototype.name = &apos;动物&apos;</span><br><span class="line">var a = new Animal()</span><br><span class="line">a.age = 3</span><br><span class="line"></span><br><span class="line">console.log(&apos;name&apos; in a)  // true</span><br><span class="line">console.log(&apos;age&apos; in  a)  // true</span><br><span class="line">console.log(&apos;sex&apos; in  a)  // false</span><br></pre></td></tr></table></figure>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>原型就是一个对象，声明函数就会创建原型对象</li>
-<li><code>prototype</code> 存在于函数中</li>
-<li>所有对象都有一个 <code>__proto__</code> 属性，它指向对象的构造函数的原型</li>
-<li>原型是对象，也有 <code>__proto__</code> 属性，<code>__proto__</code> 将对象和原型连接起来，形成原型链</li>
-<li><code>Object.prototype</code> 是原型链的顶端</li>
-<li>访问对象的属性会沿着对象的原型链找下去</li>
-<li>原型可以共享属性和方法，是继承的基础</li>
-</ul>
-<hr>
+        
+          <div class="entry-thumbnail">
+            <a href="/2019/03/08/原型原型链/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+          </div>
+          <div class="entry-summary">
+          
+你就来看看这篇文章~
 
+原型什么是原型
+原型其实就是一个特殊的对象，在声明函数的时候自动创建的。
+
+比如，我们现在声明一个构造函数 A ，除了会申请保存函数的空间，还会额外申请一个内存空间，用于存储构造函数 A 的原型对象。所有函数中(Function.prototype.bind 除外)默认都有一个 prototype 的属性，它保存了函数的原型对象的地址(引用)(也就是它指向了原型对象...
+
+        
+          <p class="article-more-link">
+            <a href="/2019/03/08/原型原型链/#more">阅读全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">

@@ -13,7 +13,7 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>原型和原型链 | 墨夜</title>
+  <title>javascript 中的原型原来是这样的 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="基础总结JavaScript">
@@ -24,15 +24,15 @@
   <meta name="description" content="什么是原型 原型其实就是一个特殊的对象，在声明函数的时候自动创建的。">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型和原型链">
+<meta property="og:title" content="JavaScript 中的原型原来是这样的">
 <meta property="og:url" content="inknight.cn/2019/03/08/原型原型链/index.html">
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="什么是原型 原型其实就是一个特殊的对象，在声明函数的时候自动创建的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(6).jpg">
-<meta property="og:updated_time" content="2019-03-11T00:36:09.313Z">
+<meta property="og:updated_time" content="2019-03-11T11:12:26.780Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型和原型链">
+<meta name="twitter:title" content="JavaScript 中的原型原来是这样的">
 <meta name="twitter:description" content="什么是原型 原型其实就是一个特殊的对象，在声明函数的时候自动创建的。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(6).jpg">
   
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" rel="gallery_cjt1jt0mz0000qwvclo7r6e7a">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" rel="gallery_cjt49059h000600vcwd83za15">
         <img src="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" itemprop="image">
       </a>
     
@@ -178,7 +178,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      原型和原型链
+      JavaScript 中的原型原来是这样的
     </h1>
   
 
@@ -218,9 +218,9 @@ var themeMenus = {};
 <p>我们已经知道了函数中的 <code>prototype</code> 属性指向的是它的原型对象，那么对象中的 <code>__proto__</code> 代表什么？</p>
 <p>一般情况下，<strong>对象中的 <code>__proto__</code> 属性是指向它的构造函数的原型对象(<code>prototype</code>)的</strong>。</p>
 <p>用一段简单的代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://inknight.cn/pic/note/原型5(1" alt=" ">.png)</p>
+<p><img src="https://inknight.cn/pic/note/原型8.png" alt=""></p>
 <p>上图看着不够简便，我们简化一下：</p>
-<p><img src="https://inknight.cn/pic/note/原型6(1" alt=" ">.png)</p>
+<p><img src="https://inknight.cn/pic/note/原型10.png" alt=""></p>
 <blockquote>
 <p>还有一点，<code>__proto__</code> 不是一个规范属性，ie(除了 ie10) 不支持。对应的标准属性是 <code>[[Prototype]]</code> ，但是这个属性我们没法直接访问到。开发者尽量不要用这种方式去访问，因为操作不慎会改变这个对象的继承原型链。</p>
 </blockquote>
@@ -307,6 +307,15 @@ var themeMenus = {};
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/03/11/JavaScript-中的继承/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JavaScript 中的继承
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/05/JavaScript-中的变量类型和类型转换/" id="article-nav-older" class="article-nav-link-wrap">

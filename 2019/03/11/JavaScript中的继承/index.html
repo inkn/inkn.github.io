@@ -13,7 +13,7 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>javascript 中的继承 | 墨夜</title>
+  <title>集齐 javascript 中的继承方式 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="基础总结JavaScript">
@@ -21,19 +21,19 @@
   
   
   
-  <meta name="description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。">
+  <meta name="description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。  继承是什么在传统面向对象语言( c++, c#, java… )中，继承是：使用已存在的类作为基础建立新的类的技术。我们把已存在的类称之为父类，新的类称之为子类。继承可以使得子类具有父类的各种属性和方法，因此可以避免写重复代码提高开发效率。">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 中的继承">
+<meta property="og:title" content="集齐 JavaScript 中的继承方式">
 <meta property="og:url" content="inknight.cn/2019/03/11/JavaScript中的继承/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。">
+<meta property="og:description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。  继承是什么在传统面向对象语言( c++, c#, java… )中，继承是：使用已存在的类作为基础建立新的类的技术。我们把已存在的类称之为父类，新的类称之为子类。继承可以使得子类具有父类的各种属性和方法，因此可以避免写重复代码提高开发效率。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(17).jpg">
-<meta property="og:updated_time" content="2019-03-14T11:30:35.287Z">
+<meta property="og:updated_time" content="2019-03-14T11:36:05.753Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 中的继承">
-<meta name="twitter:description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。">
+<meta name="twitter:title" content="集齐 JavaScript 中的继承方式">
+<meta name="twitter:description" content="JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。  继承是什么在传统面向对象语言( c++, c#, java… )中，继承是：使用已存在的类作为基础建立新的类的技术。我们把已存在的类称之为父类，新的类称之为子类。继承可以使得子类具有父类的各种属性和方法，因此可以避免写重复代码提高开发效率。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(17).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(17).jpg" rel="gallery_cjt8jtai80004c8vc78304m42">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(17).jpg" rel="gallery_cjt8k27km0012y0vc83vf2qe5">
         <img src="https://inknight.cn/pic/img/Ghostblade%20(17).jpg" itemprop="image">
       </a>
     
@@ -178,7 +178,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      JavaScript 中的继承
+      集齐 JavaScript 中的继承方式
     </h1>
   
 
@@ -201,8 +201,8 @@ var themeMenus = {};
         <blockquote>
 <p>JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「<a href="https://inknight.cn/2019/03/08/%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">JavaScript 中的原型原来是这样的</a>」里应该会有所获。</p>
 </blockquote>
-<a id="more"></a>
 <h2 id="继承是什么"><a href="#继承是什么" class="headerlink" title="继承是什么"></a>继承是什么</h2><p>在传统面向对象语言( c++, c#, java… )中，继承是：<strong>使用已存在的类作为基础建立新的类的技术</strong>。我们把已存在的类称之为<strong>父类</strong>，新的类称之为<strong>子类</strong>。继承可以使得子类具有父类的各种属性和方法，因此可以避免写重复代码提高开发效率。</p>
+<a id="more"></a>
 <p>而在 JavaScript 中是没有<strong>类</strong>这一概念的，但万物皆对象（除原始类型），我们用构造函数的<strong>原型对象</strong>代表<strong>父类</strong>对象，构造函数作为<strong>子类</strong>。通过构造函数创建出来的实例对象(子类实例)可以通过 <code>__proto__</code> 访问到父类中的方法和属性，同样实现继承机制。</p>
 <p><img src="https://inknight.cn/pic/note/继承.png" alt="继承"></p>
 <h2 id="继承的方式"><a href="#继承的方式" class="headerlink" title="继承的方式"></a>继承的方式</h2><blockquote>

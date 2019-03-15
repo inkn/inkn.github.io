@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>css盒模型分析 | 墨夜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="HTML基础总结">
+  
+  
+  
+  
+  <meta name="description" content="CSS 盒模型是前端学习中的基础，总结一下~">
+<meta name="keywords" content="HTML,基础总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS盒模型分析">
+<meta property="og:url" content="inknight.cn/2019/01/22/CSS盒模型分析/index.html">
+<meta property="og:site_name" content="墨夜">
+<meta property="og:description" content="CSS 盒模型是前端学习中的基础，总结一下~">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://inknight.cn/pic/img/34509891_p0.jpg">
+<meta property="og:updated_time" content="2019-03-03T01:05:35.092Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS盒模型分析">
+<meta name="twitter:description" content="CSS 盒模型是前端学习中的基础，总结一下~">
+<meta name="twitter:image" content="https://inknight.cn/pic/img/34509891_p0.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="墨夜" rel="home"> 墨夜 </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-CSS盒模型分析" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/34509891_p0.jpg" rel="gallery_cjt8k27j50000y0vc3qvfoj0j">
+        <img src="https://inknight.cn/pic/img/34509891_p0.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      CSS盒模型分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/01/22/CSS盒模型分析/" class="article-date">
+	  <time datetime="2019-01-22T12:15:38.000Z" itemprop="datePublished">一月 22, 2019</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>CSS 盒模型是前端学习中的基础，总结一下~</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>页面中的每个元素都可以看成一个盒子，盒子里面可以装其他盒子，层层嵌套。html 标签就是最外面的大盒子。每个盒子由内向外分别是 content, padding, border, margin 。</p>
+<p><img src="https://inknight.cn/pic/note/CSS%E7%9B%92%E6%A8%A1%E5%9E%8B.png" alt="盒子模型"></p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>盒模型有两种，<strong>标准盒模型</strong> 和 <strong>IE盒模型</strong> 。主要区别是它们的 <strong>width</strong> 和 <strong>height</strong> 不同</p>
+<ul>
+<li><p>标准盒模型<br><img src="https://inknight.cn/pic/note/标准盒模型.png" alt="标准盒模型"></p>
+<blockquote>
+<p>盒子宽高是 content(内容) 的宽高</p>
+</blockquote>
+</li>
+<li><p>IE盒模型<br><img src="https://inknight.cn/pic/note/IE盒模型.png" alt="IE盒模型"></p>
+<blockquote>
+<p>盒子宽高是 border + padding + content 的宽高</p>
+</blockquote>
+</li>
+</ul>
+<p>浏览器默认使用标准盒模型，在 ie8+ 中 可以通过设置 <code>box-sizing</code> 样式属性改变盒模型<br><br><br><strong><code>box-sizing</code></strong>:</p>
+<ul>
+<li><code>content-box</code> —&gt; 标准盒模型（默认）</li>
+<li><code>border-box</code> —&gt; IE 盒模型<h2 id="通过-js-获取盒子宽高"><a href="#通过-js-获取盒子宽高" class="headerlink" title="通过 js 获取盒子宽高"></a>通过 js 获取盒子宽高</h2><blockquote>
+<p>以下 domElement 是表示 HTML 元素的伪代码 </p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li><code>domElement.style.width/height</code><blockquote>
+<p>只能获取内联样式中的宽高</p>
+</blockquote>
+</li>
+<li><code>domElement.currentStyle.width/height</code><blockquote>
+<p>获取的是浏览中渲染完成后元素的宽高，只有 IE 浏览器支持</p>
+</blockquote>
+</li>
+<li><code>window.getComputedStyle(domElement).width/height</code><blockquote>
+<p>和方式2一样，但可以兼容更多浏览器</p>
+</blockquote>
+</li>
+<li><code>domElement.offsetWidth/offsetHeight</code><blockquote>
+<p>不管使用的什么盒模型，获取的都是 IE盒模型 的宽高</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="外边距折叠问题"><a href="#外边距折叠问题" class="headerlink" title="外边距折叠问题"></a>外边距折叠问题</h2><blockquote>
+<p>相邻元素在竖直方向上的外边距在相遇时会发生合并，合并后的外边距的高度等于两个外边距中较大的那个值。</p>
+</blockquote>
+<h3 id="兄弟元素间"><a href="#兄弟元素间" class="headerlink" title="兄弟元素间"></a>兄弟元素间</h3><p><img src="https://inknight.cn/pic/note/外边距折叠.png" alt="外边距重合"></p>
+<h3 id="父子元素间"><a href="#父子元素间" class="headerlink" title="父子元素间"></a>父子元素间</h3><p><img src="https://inknight.cn/pic/note/外边距折叠1.png" alt="外边距重合"></p>
+<h2 id="外边距折叠解决方案（BFC）"><a href="#外边距折叠解决方案（BFC）" class="headerlink" title="外边距折叠解决方案（BFC）"></a>外边距折叠解决方案（BFC）</h2><blockquote>
+<p>Block Formatting Context （块级格式化上下文）</p>
+</blockquote>
+<p>BFC 可以简单地理解为某个元素的一个 CSS 属性，只不过这个属性不能被开发者显式的修改，拥有这个属性的元素对内部元素和外部元素会表现出一些特性，这就是BFC。</p>
+<h3 id="怎样让元素创建-BFC"><a href="#怎样让元素创建-BFC" class="headerlink" title="怎样让元素创建 BFC"></a>怎样让元素创建 BFC</h3><ul>
+<li><code>float</code> 的值不为 <code>none</code> （浮动元素）</li>
+<li><code>overflow</code> 的值不为 <code>visible</code></li>
+<li><code>display</code> 的值为 <code>inline-block</code> 、<code>table-caption</code> 、 <code>table-cell</code> 、<code>flex</code> 、<code>inline-flex</code></li>
+<li><code>positon</code> 的值为 <code>absolute</code> 或 <code>fixed</code></li>
+<li><code>&lt;html&gt;</code>(根元素)</li>
+</ul>
+<h3 id="BFC-的布局规则"><a href="#BFC-的布局规则" class="headerlink" title="BFC 的布局规则"></a>BFC 的布局规则</h3><ol>
+<li>内部的 box 会在垂直方向上一个接一个地放置 （平时说的块级元素一行行放）</li>
+<li>box 间垂直方向的距离由 <code>margin</code> 决定 。同一个BFC中的两个相邻的 box 还是会产生外边距重叠问题</li>
+<li>BFC 的区域不会与 浮动的 box 重叠</li>
+<li>BFC 是一个独立的容器，里面的元素不会影响外面的元素，反之亦然。</li>
+<li>包含浮动元素，计算 BFC 的高度时，浮动的元素也会参与计算</li>
+</ol>
+<h3 id="BFC-的应用场景"><a href="#BFC-的应用场景" class="headerlink" title="BFC 的应用场景"></a>BFC 的应用场景</h3><ul>
+<li>分属于不同 BFC 的元素可以防止垂直外边距折叠</li>
+<li>清除内部浮动（使浮动元素可以撑起父盒子）</li>
+<li>自适应两栏布局（BFC 区域不会与浮动元素重叠）</li>
+<li>防止元素被浮动元素覆盖</li>
+</ul>
+<p>float + BFC 两栏布局:<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .left &#123;</span></span><br><span class="line"><span class="undefined">        float: left;</span></span><br><span class="line"><span class="undefined">        width: 100px;</span></span><br><span class="line"><span class="undefined">        background-color: blue;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .right &#123;</span></span><br><span class="line"><span class="undefined">        overflow: hidden; /* 触发 BFC */</span></span><br><span class="line"><span class="undefined">        background-color: green;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础总结/">基础总结</a></li></ul>
+
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MjM3Ni8xODkyMw==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/23/DOM-事件总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          DOM 事件详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/28/初识Three-js/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">初识Three.js</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-js-获取盒子宽高"><span class="nav-number">3.</span> <span class="nav-text">通过 js 获取盒子宽高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外边距折叠问题"><span class="nav-number">4.</span> <span class="nav-text">外边距折叠问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兄弟元素间"><span class="nav-number">4.1.</span> <span class="nav-text">兄弟元素间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父子元素间"><span class="nav-number">4.2.</span> <span class="nav-text">父子元素间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外边距折叠解决方案（BFC）"><span class="nav-number">5.</span> <span class="nav-text">外边距折叠解决方案（BFC）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样让元素创建-BFC"><span class="nav-number">5.1.</span> <span class="nav-text">怎样让元素创建 BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC-的布局规则"><span class="nav-number">5.2.</span> <span class="nav-text">BFC 的布局规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC-的应用场景"><span class="nav-number">5.3.</span> <span class="nav-text">BFC 的应用场景</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 墨夜 All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

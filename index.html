@@ -177,159 +177,24 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>JavaScript 代码的整个执行过程，分为两个阶段，代码<strong>编译阶段</strong>与代码<strong>执行阶段</strong>。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段<strong>作用域</strong>规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，<strong>执行上下文</strong>在这个阶段创建。</p>
-</blockquote>
-<h2 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域 (Scope)"></a>作用域 (Scope)</h2><h3 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h3><p>作用域是定义变量的区域。  </p>
-<p>它规定了执行代码时查找变量的范围。</p>
-<p>JavaScript 采用<strong>词法作用域</strong>(lexical scoping)，也就是静态作用域。</p>
-<p>因为 JavaScript 采用的是词法作用域，<strong>函数的作用域在函数定义的时候就决定了</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">    foo1()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo2()  <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>在 JavaScript 中无块级作用域，只有<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'abc'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(name)  <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
-<p>同一个页面中所有的 <code>&lt;script&gt;</code> 标签中的没在函数体内的变量，都在同一个全局作用域中。</p>
-<h2 id="执行上下文-execution-context"><a href="#执行上下文-execution-context" class="headerlink" title="执行上下文 (execution context)"></a>执行上下文 (execution context)</h2><h3 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h3><blockquote>
-<p>执行上下文可以抽象成一个对象，<strong>当一个函数执行时就会创建一个执行上下文</strong>。</p>
-</blockquote>
-<p>每个执行上下文，都有三个属性：</p>
-<ul>
-<li><strong>变量对象</strong>(Variable object, VO)</li>
-<li><strong>作用域链</strong>(Scope chain)</li>
-<li><strong>this</strong></li>
-</ul>
-<p>既然每执行一个函数就会创建一个执行上下文，我们写的函数可不止一个，那么如何管理众多的上下文环境呢？  </p>
-<p>JavaScript 引擎创建了<strong>执行上下文栈(Execution context stack, ECS)</strong> 来管理<strong>执行上下文</strong>。</p>
-<p>JavaScript 引擎在执行代码时，最先遇到的是全局代码，会创建一个<strong>全局上下文</strong>(globalContext)并将之压入执行上下文栈(ECS)中，当执行一个函数时，创建一个<strong>函数上下文</strong>并压入 ECS 中。函数执行完毕时，这个函数上下文会出栈并被清理。当整个程序执行完毕时，globalContext 也会出栈并被清理。</p>
-<p>看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    fun2()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fun2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun1()</span><br></pre></td></tr></table></figure>
-<p>当 JavaScript 引擎执行代码时，先创建一个全局上下文(globalContext) 压入执行上下文栈(ECS)中。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈1.png" alt=""></p>
-<p>当执行到 <code>fun1()</code> 时，创建一个函数上下文(EC_fun1)并压入栈中。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈2.png" alt=""></p>
-<p>然后执行 fun1 函数体里的 <code>fun2()</code>，创建 EC_fun2并压入栈中。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈3.png" alt=""></p>
-<p>执行 fun2 函数里的 <code>console.log()</code> 函数，创建 <code>EC_consolelog</code> 压入栈中。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈4.png" alt=""></p>
-<p>然后 <code>console.log</code> 执行完毕，<code>EC_consolelog</code> 出栈并销毁。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈3.png" alt=""></p>
-<p>然后 <code>fun2</code> 执行完毕，<code>EC_fun2</code> 出栈并销毁。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈2.png" alt=""></p>
-<p><code>fun1</code> 执行完毕，<code>EC_fun1</code> 出栈并销毁。</p>
-<p><img src="https://inknight.cn/pic/note/执行上下文栈1.png" alt=""></p>
-<h3 id="变量对象-Variable-object-VO"><a href="#变量对象-Variable-object-VO" class="headerlink" title="变量对象 (Variable object, VO)"></a>变量对象 (Variable object, VO)</h3><blockquote>
-<p>变量对象是与执行上下文相关的数据作用域，它存储了在该上下文定义的变量和函数声明。变量对象是在创建函数上下文时创建的，它通过函数的 <code>arguments</code> 属性初识化。</p>
-</blockquote>
-<p>变量对象包括：</p>
-<ol>
-<li>函数的所有形参(如果是函数上下文)<ul>
-<li>由名称和对应值组成一个变量对象(VO)的属性</li>
-</ul>
-</li>
-<li>函数声明<ul>
-<li>由名称和对应值(函数对象)组成一个变量对象(VO)的属性</li>
-<li>如果 VO 已存在相同的名称属性，则替换这个属性</li>
-</ul>
-</li>
-<li>变量声明<ul>
-<li>由名称和 <code>undefined</code> 组成一个 VO 的属性</li>
-<li>如果名称和已经声明的形参或函数相同，变量声明不会干扰已存在的这类属性</li>
-</ul>
-</li>
-</ol>
-<p>举个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
-<p>在执行 <code>foo(11)</code>时，创建一个执行上下文，此时执行上下文的变量对象时：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">VO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">11</span>,</span><br><span class="line">        length</span><br><span class="line">    &#125;,</span><br><span class="line">    a: <span class="number">11</span>,</span><br><span class="line">    b: <span class="literal">undefined</span>,</span><br><span class="line">    c: reference to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    d: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h4><ul>
-<li>全局上下文的变量对象就是全局对象。</li>
-<li>全局上下文的 <code>this</code> 指向的是全局对象。</li>
-<li>在浏览器环境下全局对象是 <code>window</code> ，Node.js 环境下全局对象是 <code>global</code> 。</li>
-</ul>
-<h4 id="活动对象-Activation-object，AO"><a href="#活动对象-Activation-object，AO" class="headerlink" title="活动对象 (Activation object，AO)"></a>活动对象 (Activation object，AO)</h4><p>活动对象与变量对象其实是同一个东西，只有当进入一个执行上下文中(<strong>这个执行上下文处在执行上下文栈的栈顶</strong>)，这个执行上下文的变量对象(VO)才会被激活，此时这个变量对象叫做活动对象(AO)。只有活动对象上的各种属性才能被访问。</p>
-<h3 id="作用域链-Scope-chain"><a href="#作用域链-Scope-chain" class="headerlink" title="作用域链 (Scope chain)"></a>作用域链 (Scope chain)</h3><blockquote>
-<p>当查找变量时，会在当前执行上下文的变量对象(也是活动对象)中查找，如果没找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象(也是全局对象)。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。</p>
-</blockquote>
-<p>函数定义时，有一个内部属性 <code>[[scope]]</code> 保存了所有父变量对象。当函数执行时会创建一个作用域链，这个作用域链包含了函数的 <code>[[scope]]</code> 属性 和执行上下文的活动对象(AO)。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line">foo()  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<p>执行过程如下：</p>
-<ol>
-<li><p>foo 函数被创建，foo 会将父变量对象(其实是当前活动对象也是全局对象)保存在 <code>[[scope]]</code> 属性中。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">foo.[[scope]] = [globalContext.VO]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行 foo 函数，创建 foo 函数执行上下文并压入执行上下文栈(ECS)中。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECS = [ fooContext,</span><br><span class="line">        globalContext]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>foo 函数并不立刻执行，需要一些准备工作，第一步：复制函数的 [[scope]] 属性到创建的作用域链(Scope)中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fooContext = &#123;</span><br><span class="line">    Scope: foo.[[scope]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步：创建活动对象并用 函数的 <code>arguments</code> 属性初始化</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fooContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        b: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [</span><br><span class="line">            foo.[[scope]]</span><br><span class="line">                         ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第三步：将活动对象压入 作用域链顶端</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fooContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        b: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [</span><br><span class="line">            AO,</span><br><span class="line">            foo.[[scope]]</span><br><span class="line">                         ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>准备工作做完，开始执行 foo 函数里的代码，更新 AO 的属性值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AO:&#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">        length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    b: 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>foo 执行完毕，foo 函数上下文出栈并销毁</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECS = [</span><br><span class="line">       globalContext</span><br><span class="line">                     ]</span><br></pre></td></tr></table></figure>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h3><p>MDN 对闭包的定义为：</p>
-<blockquote>
-<p>闭包是指那些能够访问自由变量的函数。</p>
-</blockquote>
-<p>那什么是自由变量呢？</p>
-<blockquote>
-<p>自由变量是指在函数中使用的变量，但既不是函数参数也不是函数局部变量。</p>
-</blockquote>
-<p>自由变量其实是指函数执行上下文的作用域链中非活动对象的那部分属性(也就是外层作用域的变量 <code>函数.[[scope]]</code>)</p>
-<p>所以在《JavaScript高级程序设计中》是这样描述的：</p>
-<blockquote>
-<p>闭包是指有权访问另一个函数作用域中的变量的函数。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-<p>foo 函数可以访问变量<code>a</code>，但 <code>a</code> 既不是函数参数也不是函数的局部变量，<code>a</code> 就是自由变量。<br>那么，foo 函数就是一个闭包。</p>
-<p>到这里，你或许会有疑问  </p>
-<p>这怎么和我们平时知道的闭包不是同一个，不是什么函数中嵌套一个函数，里面的函数才是一个闭包，这里怎么没有嵌套函数了？</p>
-<p>其实是站的角度不同：</p>
-<ol>
-<li>从理论角度：所有函数都是闭包。因为他们都在创建时就将上层执行上下文的数据保存起来了(函数的 <code>[[scope]]</code> 属性)。所以在函数中可以访问到外层的作用域，也就是可以访问自由变量，它就是一个闭包。</li>
-<li>从实际角度：以下才是闭包：<ul>
-<li>即使创建它的上下文已经销毁，但它依然存在(比如，内部函数从父函数中返回)</li>
-<li>在代码中引用了自由变量</li>
-</ul>
-</li>
-</ol>
-<p>举个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a++)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> add1 = foo()</span><br><span class="line"><span class="keyword">var</span> add2 = foo()</span><br><span class="line"></span><br><span class="line">add1()  <span class="comment">// 0</span></span><br><span class="line">add1()  <span class="comment">// 1</span></span><br><span class="line">add1()  <span class="comment">// 2</span></span><br><span class="line">add2()  <span class="comment">// 0</span></span><br><span class="line">add2()  <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
-<p>foo() 函数执行完毕，foo函数执行上下文已经被销毁，那么上下文的变量对象中的 <code>a</code> 变量应该也被销毁了啊，问啥还能访问到？</p>
-<p>因为 add 函数在定义时就存在一个 <code>[[scope]]</code> 属性，它保存了 foo 函数执行上下文的变量对象，在执行 add 函数时，会创建作用域链并将 <code>add.[[scope]]</code> 复制到作用域链中，所以在 add 函数中可以通过作用域链访问到 <code>a</code> 属性。</p>
-<p>你可能还有一个问题，为什么 <code>add1()</code> 和 <code>add2()</code> 访问的不是同一个 <code>a</code> ？<br>因为每执行一次函数就会创建一个函数执行上下文，所以执行 <code>add1 = foo()</code> 和 <code>add2 = foo()</code> 产生的是<br>不同的执行上下文(对象)，他们的 <code>a</code> 属性当然不同了。</p>
-<h3 id="闭包的面试题"><a href="#闭包的面试题" class="headerlink" title="闭包的面试题"></a>闭包的面试题</h3><blockquote>
-<p>经典面试体，循环中使用闭包解决 <code>var</code> 定义 i，异步打印 i 值的问题</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码执行结果是每个一秒打印 5 ，一共打印五次。</p>
-<p>这里面涉及到事件循环机制，这里就不多赘述，简单的说就是等 for 循环结束后，才开始依次执行这几个 <code>setTimeout()</code> 里面的 foo 函数。</p>
-<p>JS 没有块级作用域，此时的 <code>i</code> 值为 5 ，<code>console.log(i)</code> 访问的就是全局变量 <code>i</code> ，所以打印 5。</p>
-<p>我们要做就是使用闭包的特性，让。  <code>console.log(i)</code> 访问的是局部变量 <code>i</code> 而非全局变量 <code>i</code>。</p>
-<p>使用闭包的特性，让 <code>console.log(i)</code> 访问的不是全局变量 <code>i</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    ;(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;,<span class="number">1000</span> * i)</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者这样：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout((<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">             <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;)(i),<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>也可以使用 ES6 中的 <code>let</code> 换掉 <code>var</code>，使得 for 循环中 <code>i</code> 使一个块级作用域的本地变量。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="闭包的优缺点"><a href="#闭包的优缺点" class="headerlink" title="闭包的优缺点"></a>闭包的优缺点</h3><p><strong>闭包可以为单例创建私有属性和方法。</strong>  </p>
-<blockquote>
-<p>单例：指的是只有一个实例的对象。JavaScript 一般以字面量的方式来创建单例。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> singel = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性，外部访问不到</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">20</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 公有属性</span></span><br><span class="line">        name: <span class="string">'Tom'</span>,</span><br><span class="line">        getAge: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> age</span><br><span class="line">        &#125;,</span><br><span class="line">        setAge: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">            age = n</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(singel.age)  <span class="comment">// undefined</span></span><br><span class="line">singel.foo()  <span class="comment">// Uncaught TypeError: singel.foo is not a function</span></span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 20</span></span><br><span class="line">singel.setAge(<span class="number">10</span>) <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<p><strong>匿名函数最大的用途就是创建闭包</strong>。</p>
-<p>通过匿名函数实现一个闭包计数器：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> numberCounter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ++num</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
-<p>闭包的缺陷：</p>
-<ul>
-<li>闭包所访问的自由变量会常驻内存增大内存的使用量，使用不当很容易造成内存泄漏。</li>
-</ul>
+        
+          <div class="entry-thumbnail">
+            <a href="/2019/03/18/JavaScript中的作用域与闭包/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+          </div>
+          <div class="entry-summary">
+          
+JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。
 
+
+作用域 (Scope)什么是作用域作用域是定义变量的区域。  
+它规定了执行代码时查找变量的范围。
+JavaScript 采用词法作用域(lexical sc...
+
+        
+          <p class="article-more-link">
+            <a href="/2019/03/18/JavaScript中的作用域与闭包/#more">阅读全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">

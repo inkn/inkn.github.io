@@ -21,19 +21,19 @@
   
   
   
-  <meta name="description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。  作用域 (Scope)什么是作用域作用域是定义变量的区域。   它规定了执行代码时查找变量的范围。 JavaScript 采用词法作用域(lexical scopin">
+  <meta name="description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中的作用域、执行上下文与闭包">
 <meta property="og:url" content="inknight.cn/2019/03/18/JavaScript中的作用域与闭包/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。  作用域 (Scope)什么是作用域作用域是定义变量的区域。   它规定了执行代码时查找变量的范围。 JavaScript 采用词法作用域(lexical scopin">
+<meta property="og:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
-<meta property="og:updated_time" content="2019-03-19T11:19:37.034Z">
+<meta property="og:updated_time" content="2019-03-19T11:20:26.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的作用域、执行上下文与闭包">
-<meta name="twitter:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。  作用域 (Scope)什么是作用域作用域是定义变量的区域。   它规定了执行代码时查找变量的范围。 JavaScript 采用词法作用域(lexical scopin">
+<meta name="twitter:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -201,6 +201,7 @@ var themeMenus = {};
         <blockquote>
 <p>JavaScript 代码的整个执行过程，分为两个阶段，代码<strong>编译阶段</strong>与代码<strong>执行阶段</strong>。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段<strong>作用域</strong>规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，<strong>执行上下文</strong>在这个阶段创建。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域 (Scope)"></a>作用域 (Scope)</h2><h3 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h3><p>作用域是定义变量的区域。  </p>
 <p>它规定了执行代码时查找变量的范围。</p>
 <p>JavaScript 采用<strong>词法作用域</strong>(lexical scoping)，也就是静态作用域。</p>

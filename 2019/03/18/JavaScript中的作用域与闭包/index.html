@@ -30,7 +30,7 @@
 <meta property="og:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
-<meta property="og:updated_time" content="2019-03-19T11:20:26.766Z">
+<meta property="og:updated_time" content="2019-03-21T01:02:06.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的作用域、执行上下文与闭包">
 <meta name="twitter:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
@@ -166,7 +166,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" rel="gallery_cjtform1z000vmkvch7r06ovi">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" rel="gallery_cjti0tg190010fcvch9k1bmk4">
         <img src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" itemprop="image">
       </a>
     
@@ -210,7 +210,7 @@ var themeMenus = {};
 <p>在 JavaScript 中无块级作用域，只有<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'abc'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(name)  <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
 <p>同一个页面中所有的 <code>&lt;script&gt;</code> 标签中的没在函数体内的变量，都在同一个全局作用域中。</p>
-<h2 id="执行上下文-execution-context"><a href="#执行上下文-execution-context" class="headerlink" title="执行上下文 (execution context)"></a>执行上下文 (execution context)</h2><h3 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h3><blockquote>
+<h2 id="执行上下文-Execution-context"><a href="#执行上下文-Execution-context" class="headerlink" title="执行上下文 (Execution context)"></a>执行上下文 (Execution context)</h2><h3 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h3><blockquote>
 <p>执行上下文可以抽象成一个对象，<strong>当一个函数执行时就会创建一个执行上下文</strong>。</p>
 </blockquote>
 <p>每个执行上下文，都有三个属性：</p>
@@ -219,7 +219,7 @@ var themeMenus = {};
 <li><strong>作用域链</strong>(Scope chain)</li>
 <li><strong>this</strong></li>
 </ul>
-<p>既然每执行一个函数就会创建一个执行上下文，我们写的函数可不止一个，那么如何管理众多的上下文环境呢？  </p>
+<p>既然每执行一个函数就会创建一个执行上下文，我们写的函数可不止一个，那么如何管理众多的上下文呢？  </p>
 <p>JavaScript 引擎创建了<strong>执行上下文栈(Execution context stack, ECS)</strong> 来管理<strong>执行上下文</strong>。</p>
 <p>JavaScript 引擎在执行代码时，最先遇到的是全局代码，会创建一个<strong>全局上下文</strong>(globalContext)并将之压入执行上下文栈(ECS)中，当执行一个函数时，创建一个<strong>函数上下文</strong>并压入 ECS 中。函数执行完毕时，这个函数上下文会出栈并被清理。当整个程序执行完毕时，globalContext 也会出栈并被清理。</p>
 <p>看一个例子：</p>
@@ -271,7 +271,7 @@ var themeMenus = {};
 <h3 id="作用域链-Scope-chain"><a href="#作用域链-Scope-chain" class="headerlink" title="作用域链 (Scope chain)"></a>作用域链 (Scope chain)</h3><blockquote>
 <p>当查找变量时，会在当前执行上下文的变量对象(也是活动对象)中查找，如果没找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象(也是全局对象)。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。</p>
 </blockquote>
-<p>函数定义时，有一个内部属性 <code>[[scope]]</code> 保存了所有父变量对象。当函数执行时会创建一个作用域链，这个作用域链包含了函数的 <code>[[scope]]</code> 属性 和执行上下文的活动对象(AO)。</p>
+<p>函数<strong>定义</strong>时，有一个内部属性 <code>[[scope]]</code> 保存了所有父变量对象。当函数<strong>执行</strong>时会创建一个作用域链，这个作用域链包含了函数的 <code>[[scope]]</code> 属性和执行上下文的活动对象(AO)。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line">foo()  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 <p>执行过程如下：</p>
 <ol>
@@ -284,7 +284,7 @@ var themeMenus = {};
 <li><p>foo 函数并不立刻执行，需要一些准备工作，第一步：复制函数的 [[scope]] 属性到创建的作用域链(Scope)中</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fooContext = &#123;</span><br><span class="line">    Scope: foo.[[scope]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>第二步：创建活动对象并用 函数的 <code>arguments</code> 属性初始化</p>
+<li><p>第二步：<strong>创建活动对象并用函数的</strong> <code>arguments</code> 属性初始化</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fooContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        b: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [</span><br><span class="line">            foo.[[scope]]</span><br><span class="line">                         ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>第三步：将活动对象压入 作用域链顶端</p>
@@ -299,7 +299,7 @@ var themeMenus = {};
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECS = [</span><br><span class="line">       globalContext</span><br><span class="line">                     ]</span><br></pre></td></tr></table></figure>
 <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h3><p>MDN 对闭包的定义为：</p>
 <blockquote>
-<p>闭包是指那些能够访问自由变量的函数。</p>
+<p>闭包是指那些能够访问自由变量的<strong>函数</strong>。</p>
 </blockquote>
 <p>那什么是自由变量呢？</p>
 <blockquote>
@@ -316,7 +316,7 @@ var themeMenus = {};
 <p>这怎么和我们平时知道的闭包不是同一个，不是什么函数中嵌套一个函数，里面的函数才是一个闭包，这里怎么没有嵌套函数了？</p>
 <p>其实是站的角度不同：</p>
 <ol>
-<li>从理论角度：所有函数都是闭包。因为他们都在创建时就将上层执行上下文的数据保存起来了(函数的 <code>[[scope]]</code> 属性)。所以在函数中可以访问到外层的作用域，也就是可以访问自由变量，它就是一个闭包。</li>
+<li>从理论角度：所有函数都是闭包。因为他们都在创建时就将上层执行上下文的数据保存起来了(函数的 <code>[[scope]]</code> 属性)。所以在函数中可以作用域链访问到外层作用域的变量，也就是可以访问自由变量，它就是一个闭包。</li>
 <li>从实际角度：以下才是闭包：<ul>
 <li>即使创建它的上下文已经销毁，但它依然存在(比如，内部函数从父函数中返回)</li>
 <li>在代码中引用了自由变量</li>
@@ -325,31 +325,39 @@ var themeMenus = {};
 </ol>
 <p>举个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a++)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> add1 = foo()</span><br><span class="line"><span class="keyword">var</span> add2 = foo()</span><br><span class="line"></span><br><span class="line">add1()  <span class="comment">// 0</span></span><br><span class="line">add1()  <span class="comment">// 1</span></span><br><span class="line">add1()  <span class="comment">// 2</span></span><br><span class="line">add2()  <span class="comment">// 0</span></span><br><span class="line">add2()  <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
 <p>foo() 函数执行完毕，foo函数执行上下文已经被销毁，那么上下文的变量对象中的 <code>a</code> 变量应该也被销毁了啊，问啥还能访问到？</p>
-<p>因为 add 函数在定义时就存在一个 <code>[[scope]]</code> 属性，它保存了 foo 函数执行上下文的变量对象，在执行 add 函数时，会创建作用域链并将 <code>add.[[scope]]</code> 复制到作用域链中，所以在 add 函数中可以通过作用域链访问到 <code>a</code> 属性。</p>
-<p>你可能还有一个问题，为什么 <code>add1()</code> 和 <code>add2()</code> 访问的不是同一个 <code>a</code> ？<br>因为每执行一次函数就会创建一个函数执行上下文，所以执行 <code>add1 = foo()</code> 和 <code>add2 = foo()</code> 产生的是<br>不同的执行上下文(对象)，他们的 <code>a</code> 属性当然不同了。</p>
+<p>因为 add 函数在定义时就存在一个 <code>[[scope]]</code> 属性，它保存了 foo 函数执行上下文的变量对象，在执行 add 函数时，会创建一个执行上下文链并将 <code>add.[[scope]]</code> 复制到该执行上下文的作用域链中，所以在 add 函数中可以通过作用域链访问到 <code>a</code> 属性。</p>
+<p>你可能还有一个问题，为什么 <code>add1()</code> 和 <code>add2()</code> 访问的不是同一个 <code>a</code> ？<br>因为每执行一次函数就会创建一个函数执行上下文，所以执行 <code>add1 = foo()</code> 和 <code>add2 = foo()</code> 产生的是不同的执行上下文(对象)，他们的 <code>a</code> 属性当然不同了。</p>
 <h3 id="闭包的面试题"><a href="#闭包的面试题" class="headerlink" title="闭包的面试题"></a>闭包的面试题</h3><blockquote>
-<p>经典面试体，循环中使用闭包解决 <code>var</code> 定义 i，异步打印 i 值的问题</p>
+<p>经典面试题，使用闭包解决 for 循环中 <code>var</code> 异步打印 i 值的问题</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码执行结果是每个一秒打印 5 ，一共打印五次。</p>
+<p>以上代码执行结果是：<code>5 5 5 5 5</code>。</p>
 <p>这里面涉及到事件循环机制，这里就不多赘述，简单的说就是等 for 循环结束后，才开始依次执行这几个 <code>setTimeout()</code> 里面的 foo 函数。</p>
 <p>JS 没有块级作用域，此时的 <code>i</code> 值为 5 ，<code>console.log(i)</code> 访问的就是全局变量 <code>i</code> ，所以打印 5。</p>
-<p>我们要做就是使用闭包的特性，让。  <code>console.log(i)</code> 访问的是局部变量 <code>i</code> 而非全局变量 <code>i</code>。</p>
-<p>使用闭包的特性，让 <code>console.log(i)</code> 访问的不是全局变量 <code>i</code></p>
+<p>我们要做就是使用闭包的特性，让 <code>console.log(i)</code> 访问的不是全局变量 <code>i</code></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    ;(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;,<span class="number">1000</span> * i)</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>或者这样：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout((<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">             <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;)(i),<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>也可以使用 ES6 中的 <code>let</code> 换掉 <code>var</code>，使得 for 循环中 <code>i</code> 使一个块级作用域的本地变量。</p>
+<p>也可以使用 ES6 中的 <code>let</code> 换掉 <code>var</code>，使得 for 循环中 <code>i</code> 成为一个块级作用域的本地变量。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span> ; i++) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;,<span class="number">1000</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="闭包的优缺点"><a href="#闭包的优缺点" class="headerlink" title="闭包的优缺点"></a>闭包的优缺点</h3><p><strong>闭包可以为单例创建私有属性和方法。</strong>  </p>
+<h3 id="闭包的优缺点"><a href="#闭包的优缺点" class="headerlink" title="闭包的优缺点"></a>闭包的优缺点</h3><p><strong>闭包可以创建私有属性和方法。</strong>  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> singel = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性，外部访问不到</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">20</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 公有属性</span></span><br><span class="line">        name: <span class="string">'Tom'</span>,</span><br><span class="line">        getAge: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> age</span><br><span class="line">        &#125;,</span><br><span class="line">        setAge: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">            age = n</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(singel.age)  <span class="comment">// undefined</span></span><br><span class="line">singel.foo()  <span class="comment">// Uncaught TypeError: singel.foo is not a function</span></span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 20</span></span><br><span class="line">singel.setAge(<span class="number">10</span>) </span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>单例：指的是只有一个实例的对象。JavaScript 一般以字面量的方式来创建单例。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> singel = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性，外部访问不到</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">20</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 公有属性</span></span><br><span class="line">        name: <span class="string">'Tom'</span>,</span><br><span class="line">        getAge: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> age</span><br><span class="line">        &#125;,</span><br><span class="line">        setAge: <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">            age = n</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(singel.age)  <span class="comment">// undefined</span></span><br><span class="line">singel.foo()  <span class="comment">// Uncaught TypeError: singel.foo is not a function</span></span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 20</span></span><br><span class="line">singel.setAge(<span class="number">10</span>) <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(singel.getAge())  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<p><strong>匿名函数最大的用途就是创建闭包</strong>。</p>
+<p><strong>匿名函数最大的用途就是创建闭包</strong>。并且还可以构建命名空间，减少全局变量的污染。</p>
 <p>通过匿名函数实现一个闭包计数器：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> numberCounter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ++num</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
 <p>闭包的缺陷：</p>
 <ul>
 <li>闭包所访问的自由变量会常驻内存增大内存的使用量，使用不当很容易造成内存泄漏。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>作用域是定义变量的区域，规定了变量的访问范围，它在函数定义时确定。</li>
+<li>执行上下文是一个对象，在函数执行时创建，它有变量对象、作用域链、this 三个属性。</li>
+<li>函数执行时，变量对象通过函数的 <code>arguments</code> 属性初始化，它包含函数的参数、函数体里声明的变量。</li>
+<li>函数执行时，作用域链是由函数的 <code>[[scope]]</code> 属性中的变量 + 活动对象中的变量组成的。</li>
+<li>闭包是访问外部作用域的变量的函数。</li>
+<li>闭包可以创建私有属性和方法。</li>
+<li>闭包会造成内除泄露。</li>
 </ul>
 
       
@@ -396,6 +404,15 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
+    <a href="/2019/03/21/this/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          this
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/03/11/JavaScript中的继承/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -413,7 +430,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域-Scope"><span class="nav-number">1.</span> <span class="nav-text">作用域 (Scope)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是作用域"><span class="nav-number">1.1.</span> <span class="nav-text">什么是作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行上下文-execution-context"><span class="nav-number">2.</span> <span class="nav-text">执行上下文 (execution context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是执行上下文"><span class="nav-number">2.1.</span> <span class="nav-text">什么是执行上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量对象-Variable-object-VO"><span class="nav-number">2.2.</span> <span class="nav-text">变量对象 (Variable object, VO)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局对象"><span class="nav-number">2.2.1.</span> <span class="nav-text">全局对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#活动对象-Activation-object，AO"><span class="nav-number">2.2.2.</span> <span class="nav-text">活动对象 (Activation object，AO)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链-Scope-chain"><span class="nav-number">2.3.</span> <span class="nav-text">作用域链 (Scope chain)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是闭包"><span class="nav-number">3.1.</span> <span class="nav-text">什么是闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的面试题"><span class="nav-number">3.2.</span> <span class="nav-text">闭包的面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的优缺点"><span class="nav-number">3.3.</span> <span class="nav-text">闭包的优缺点</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域-Scope"><span class="nav-number">1.</span> <span class="nav-text">作用域 (Scope)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是作用域"><span class="nav-number">1.1.</span> <span class="nav-text">什么是作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行上下文-Execution-context"><span class="nav-number">2.</span> <span class="nav-text">执行上下文 (Execution context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是执行上下文"><span class="nav-number">2.1.</span> <span class="nav-text">什么是执行上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量对象-Variable-object-VO"><span class="nav-number">2.2.</span> <span class="nav-text">变量对象 (Variable object, VO)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局对象"><span class="nav-number">2.2.1.</span> <span class="nav-text">全局对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#活动对象-Activation-object，AO"><span class="nav-number">2.2.2.</span> <span class="nav-text">活动对象 (Activation object，AO)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链-Scope-chain"><span class="nav-number">2.3.</span> <span class="nav-text">作用域链 (Scope chain)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是闭包"><span class="nav-number">3.1.</span> <span class="nav-text">什么是闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的面试题"><span class="nav-number">3.2.</span> <span class="nav-text">闭包的面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的优缺点"><span class="nav-number">3.3.</span> <span class="nav-text">闭包的优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol>
     
     </div>
   </aside>

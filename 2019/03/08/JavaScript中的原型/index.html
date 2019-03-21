@@ -29,12 +29,12 @@
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="什么是原型 原型其实就是一个特殊的对象，在声明函数的时候自动创建的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(6).jpg">
-<meta property="og:updated_time" content="2019-03-14T00:46:47.344Z">
+<meta property="og:image" content="https://inkn.github.io/pic/img/Ghostblade%20(6).jpg">
+<meta property="og:updated_time" content="2019-03-21T13:03:24.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 中的原型原来是这样的">
 <meta name="twitter:description" content="什么是原型 原型其实就是一个特殊的对象，在声明函数的时候自动创建的。">
-<meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(6).jpg">
+<meta name="twitter:image" content="https://inkn.github.io/pic/img/Ghostblade%20(6).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
   
@@ -166,8 +166,8 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" rel="gallery_cjti0tg0h0006fcvcey85tfaj">
-        <img src="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="https://inkn.github.io/pic/img/Ghostblade%20(6).jpg" rel="gallery_cjti0tg0h0006fcvcey85tfaj">
+        <img src="https://inkn.github.io/pic/img/Ghostblade%20(6).jpg" itemprop="image">
       </a>
     
   </div>
@@ -203,9 +203,9 @@ var themeMenus = {};
 </blockquote>
 <a id="more"></a>
 <p>比如，我们现在声明一个构造函数 A ，除了会申请保存函数的内存空间，还会额外申请一个内存空间，用于存储构造函数 A 的原型对象。<strong>所有函数中(Function.prototype.bind 除外)默认都有一个 <code>prototype</code> 的属性</strong>，它保存了函数的原型对象的<strong>地址(引用)</strong>(也就是它指向了原型对象)。<br>而在原型对象中默认有一个 <code>constructor</code> 属性存储了构造函数的<strong>地址(引用)</strong>(也就是 <code>constructor</code> 指向了构造函数)。如果不理解上面所说的，那我们看下面的图：</p>
-<p><img src="https://inknight.cn/pic/note/原型1.png" alt="原型"></p>
+<p><img src="https://inkn.github.io/pic/note/原型1.png" alt="原型"></p>
 <p>浏览器控制台中：</p>
-<p><img src="https://inknight.cn/pic/note/原型2.png" alt="原型"></p>
+<p><img src="https://inkn.github.io/pic/note/原型2.png" alt="原型"></p>
 <h2 id="proto-与-prototype"><a href="#proto-与-prototype" class="headerlink" title="_ _proto_ _ 与 prototype"></a><code>_ _proto_ _</code> 与 <code>prototype</code></h2><blockquote>
 <p>刚开始接触原型的时候这两个东西很容易就搞混了。</p>
 </blockquote>
@@ -214,29 +214,29 @@ var themeMenus = {};
 <li><code>prototype</code> 是函数中才有的属性</li>
 <li><code>__proto__</code> 是所有对象都有的属性</li>
 </ul>
-<p><img src="https://inknight.cn/pic/note/原型3.png" alt=" _ _proto_ _ 与 prototye"></p>
+<p><img src="https://inkn.github.io/pic/note/原型3.png" alt=" _ _proto_ _ 与 prototye"></p>
 <p>我们已经知道了函数中的 <code>prototype</code> 属性指向的是它的原型对象，那么对象中的 <code>__proto__</code> 代表什么？</p>
 <p>一般情况下，<strong>对象中的 <code>__proto__</code> 属性是指向它的构造函数的原型对象的</strong>，即和构造函数中的 <code>prototype</code> 属性所指向的对象是同一个对象。</p>
 <p>用一段简单的代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://inknight.cn/pic/note/原型8.png" alt=""></p>
+<p><img src="https://inkn.github.io/pic/note/原型8.png" alt=""></p>
 <p>上图看着不够简便，我们简化一下：</p>
-<p><img src="https://inknight.cn/pic/note/原型10.png" alt=""></p>
+<p><img src="https://inkn.github.io/pic/note/原型10.png" alt=""></p>
 <blockquote>
 <p>还有一点，<code>__proto__</code> 不是一个规范属性，ie(除了 ie10) 不支持。对应的标准属性是 <code>[[Prototype]]</code> ，但是这个属性我们没法直接访问到。开发者尽量不要用这种方式去访问，因为操作不慎会改变这个对象的继承原型链。</p>
 </blockquote>
 <p>在使用 <code>Object.create(参数)</code> 方式创建对象时，对象的 <code>__proto__</code> 属性指向的是传入的参数。</p>
-<p><img src="https://inknight.cn/pic/note/原型7.png" alt=" "></p>
+<p><img src="https://inkn.github.io/pic/note/原型7.png" alt=" "></p>
 <h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><blockquote>
 <p>由于 <code>__proto__</code> 是所有对象都具有的属性，而 <code>__proto__</code> 本身指向的<strong>原型</strong>(函数.prototype)也是一个对象，它也有 <code>__proto__</code> 属性。所以这样会形成由 <code>__proto__</code> 将<strong>对象</strong>和<strong>原型</strong>连起来的链条。这就是<strong>原型链</strong>。原型链的顶端是 <code>Object.prototype</code>（Object 是所有对象的祖宗） ，<code>Object.prototype.__proto__</code>的值为 <code>null</code> 。</p>
 </blockquote>
 <p>还是看之前的代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure></p>
-<p>它的原型链如下：<br><img src="https://inknight.cn/pic/note/原型链1.png" alt="原型链"></p>
-<p>构造函数 A 其实也是一个对象。<strong>所有函数都是由 <code>Function</code> 函数构造的</strong>。(声明函数 <code>function A() {}</code> 等价于 <code>var A = new Function()</code>) 。所以所有函数的 <code>__proto__</code> 指向的都是 <code>Function.prototype</code> 。更新上图：<br><img src="https://inknight.cn/pic/note/原型链2.png" alt="原型链"></p>
+<p>它的原型链如下：<br><img src="https://inkn.github.io/pic/note/原型链1.png" alt="原型链"></p>
+<p>构造函数 A 其实也是一个对象。<strong>所有函数都是由 <code>Function</code> 函数构造的</strong>。(声明函数 <code>function A() {}</code> 等价于 <code>var A = new Function()</code>) 。所以所有函数的 <code>__proto__</code> 指向的都是 <code>Function.prototype</code> 。更新上图：<br><img src="https://inkn.github.io/pic/note/原型链2.png" alt="原型链"></p>
 <p><code>Function</code> 也是一个函数，它的 <code>__proto__</code> 指向的也是 <code>Functon.prototype</code> 即 <code>Funtion.__proto__ === Function.prototype</code>。继更新上图：</p>
-<p><img src="https://inknight.cn/pic/note/原型链3.png" alt="原型链"></p>
+<p><img src="https://inkn.github.io/pic/note/原型链3.png" alt="原型链"></p>
 <p><code>Object</code> 同样是一个函数，所以 <code>Object.__proto__ === Function.prototype</code></p>
 <p>到了这里，我们应该可以看懂下面这张图了：</p>
-<p><img src="https://inknight.cn/pic/note/原型链4.png" alt="原型链"></p>
+<p><img src="https://inkn.github.io/pic/note/原型链4.png" alt="原型链"></p>
 <h2 id="原型的作用"><a href="#原型的作用" class="headerlink" title="原型的作用"></a>原型的作用</h2><blockquote>
 <p>当 JS 引擎查找对象属性时，先查找对象本身是否存在该属性，如果不存在，会在对象的 <code>__proto__</code> 里找，还找不到就会沿着原型链一直找到<strong>原型链顶端(Object.prototype)</strong> 直到找到属性为止，最后在原型链顶端都没找到就返回 <code>undefined</code> 。</p>
 </blockquote>

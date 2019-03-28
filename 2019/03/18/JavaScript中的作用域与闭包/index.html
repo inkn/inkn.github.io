@@ -29,12 +29,12 @@
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg">
-<meta property="og:updated_time" content="2019-03-21T13:03:21.406Z">
+<meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
+<meta property="og:updated_time" content="2019-03-28T12:17:06.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的作用域、执行上下文与闭包">
 <meta name="twitter:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
-<meta name="twitter:image" content="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg">
+<meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
   
@@ -166,8 +166,8 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg" rel="gallery_cjti0tg190010fcvch9k1bmk4">
-        <img src="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" rel="gallery_cjtsm07dn0016qovc0l4c9s9k">
+        <img src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" itemprop="image">
       </a>
     
   </div>
@@ -203,11 +203,11 @@ var themeMenus = {};
 </blockquote>
 <a id="more"></a>
 <h2 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域 (Scope)"></a>作用域 (Scope)</h2><h3 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h3><p>作用域是定义变量的区域。  </p>
-<p>它规定了执行代码时查找变量的范围。</p>
+<p>它规定了执行代码时查找变量的范围，也就是变量的作用范围。</p>
 <p>JavaScript 采用<strong>词法作用域</strong>(lexical scoping)，也就是静态作用域。</p>
 <p>因为 JavaScript 采用的是词法作用域，<strong>函数的作用域在函数定义的时候就决定了</strong>。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">    foo1()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo2()  <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>在 JavaScript 中无块级作用域，只有<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
+<p>在 JavaScript 中无块级作用域(一对儿 { } 包含的区域 )，只有<strong>全局作用域</strong>和<strong>函数作用域</strong>。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'abc'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(name)  <span class="comment">// 'abc'</span></span><br></pre></td></tr></table></figure>
 <p>同一个页面中所有的 <code>&lt;script&gt;</code> 标签中的没在函数体内的变量，都在同一个全局作用域中。</p>
 <h2 id="执行上下文-Execution-context"><a href="#执行上下文-Execution-context" class="headerlink" title="执行上下文 (Execution context)"></a>执行上下文 (Execution context)</h2><h3 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h3><blockquote>
@@ -225,19 +225,19 @@ var themeMenus = {};
 <p>看一个例子：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    fun2()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'fun2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun1()</span><br></pre></td></tr></table></figure>
 <p>当 JavaScript 引擎执行代码时，先创建一个全局上下文(globalContext) 压入执行上下文栈(ECS)中。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈1.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈1.png" alt=""></p>
 <p>当执行到 <code>fun1()</code> 时，创建一个函数上下文(EC_fun1)并压入栈中。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈2.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈2.png" alt=""></p>
 <p>然后执行 fun1 函数体里的 <code>fun2()</code>，创建 EC_fun2并压入栈中。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈3.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈3.png" alt=""></p>
 <p>执行 fun2 函数里的 <code>console.log()</code> 函数，创建 <code>EC_consolelog</code> 压入栈中。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈4.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈4.png" alt=""></p>
 <p>然后 <code>console.log</code> 执行完毕，<code>EC_consolelog</code> 出栈并销毁。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈3.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈3.png" alt=""></p>
 <p>然后 <code>fun2</code> 执行完毕，<code>EC_fun2</code> 出栈并销毁。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈2.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈2.png" alt=""></p>
 <p><code>fun1</code> 执行完毕，<code>EC_fun1</code> 出栈并销毁。</p>
-<p><img src="https://inkn.github.io/pic/note/执行上下文栈1.png" alt=""></p>
+<p><img src="https://inknight.cn/pic/note/执行上下文栈1.png" alt=""></p>
 <h3 id="变量对象-Variable-object-VO"><a href="#变量对象-Variable-object-VO" class="headerlink" title="变量对象 (Variable object, VO)"></a>变量对象 (Variable object, VO)</h3><blockquote>
 <p>变量对象是与执行上下文相关的数据作用域，它存储了在该上下文定义的变量和函数声明。变量对象是在创建函数上下文时创建的，它通过函数的 <code>arguments</code> 属性初识化。</p>
 </blockquote>
@@ -261,7 +261,7 @@ var themeMenus = {};
 <p>举个例子：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
 <p>在执行 <code>foo(11)</code>时，创建一个执行上下文，此时执行上下文的变量对象时：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">VO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">11</span>,</span><br><span class="line">        length</span><br><span class="line">    &#125;,</span><br><span class="line">    a: <span class="number">11</span>,</span><br><span class="line">    b: <span class="literal">undefined</span>,</span><br><span class="line">    c: reference to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    d: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">VO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">11</span>,</span><br><span class="line">        length: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    a: <span class="number">11</span>,</span><br><span class="line">    b: <span class="literal">undefined</span>,</span><br><span class="line">    c: reference to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    d: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h4><ul>
 <li>全局上下文的变量对象就是全局对象。</li>
 <li>全局上下文的 <code>this</code> 指向的是全局对象。</li>
@@ -408,7 +408,7 @@ var themeMenus = {};
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          this
+          一句话道尽 this
         
       </div>
     </a>

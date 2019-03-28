@@ -153,6 +153,49 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-ES6" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/03/28/ES6/">ES6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/03/28/ES6/" class="article-date">
+	  <time datetime="2019-03-28T12:23:17.000Z" itemprop="datePublished">三月 28, 2019</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-this" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -161,7 +204,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/21/this/">this</a>
+      <a class="article-title" href="/2019/03/21/this/">一句话道尽 this</a>
     </h1>
   
 
@@ -178,11 +221,34 @@ var themeMenus = {};
     <div class="article-entry" itemprop="articleBody">
       
         
+          <div class="entry-thumbnail">
+            <a href="/2019/03/21/this/"><img width="250" height="175" src="https://inkn.github.io/pic/img/61687348_p0.jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+          </div>
+          <div class="entry-summary">
+          
+this 的指向，apply、bind、call 一起搞定~
+
+
+thisthis 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 this 一般是在函数调用时确定的。
+this 指向的是谁一般情况下，请记住 “谁调用我，我就代表谁“。
+var name = 'window'function foo() &#123;    var name = '...
+
+        
+          <p class="article-more-link">
+            <a href="/2019/03/21/this/#more">阅读全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础总结/">基础总结</a></li></ul>
+
       
             
       
@@ -222,7 +288,7 @@ var themeMenus = {};
       
         
           <div class="entry-thumbnail">
-            <a href="/2019/03/18/JavaScript中的作用域与闭包/"><img width="250" height="175" src="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+            <a href="/2019/03/18/JavaScript中的作用域与闭包/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
           </div>
           <div class="entry-summary">
           
@@ -230,8 +296,8 @@ JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段
 
 
 作用域 (Scope)什么是作用域作用域是定义变量的区域。  
-它规定了执行代码时查找变量的范围。
-JavaScript 采用词法作用域(lexical sc...
+它规定了执行代码时查找变量的范围，也就是变量的作用范围。
+JavaScript 采用词法作用域...
 
         
           <p class="article-more-link">
@@ -465,80 +531,6 @@ symbol (ECMAScript 6)
     
 
   
-    <article id="post-网络协议" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/03/网络协议/">网络协议总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2019/03/03/网络协议/" class="article-date">
-	  <time datetime="2019-03-03T01:38:53.000Z" itemprop="datePublished">三月 3, 2019</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-          <div class="entry-thumbnail">
-            <a href="/2019/03/03/网络协议/"><img width="250" height="175" src="https://inkn.github.io/pic/img/Ghostblade9.jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
-          </div>
-          <div class="entry-summary">
-          
-前端主要关注于应用层 HTTP 协议，传输层 TCP 协议,断舍离一下，就主要总结这两种协议了。
-
-
-OSI 参考模型 与 TCP/IP 五层模型
-我们主要关注于 TCP/IP 五层模型 的 应用层 和 传输层 就足够了。
-应用层:
-
-作用：为应用程序提供服务。
-常见协议：HTTP、HTTPS、FTP、POP3、SMTP等。
-
-传输层:
-
-作用：实现应用程序之间的数据传输。
-协议：UDP、...
-
-        
-          <p class="article-more-link">
-            <a href="/2019/03/03/网络协议/#more">阅读全文</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础总结/">基础总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
@@ -643,7 +635,22 @@ OSI 参考模型 与 TCP/IP 五层模型
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/03/21/this/">this</a></h6>
+              <h6 style="margin: 0;"><a href="/2019/03/28/ES6/">ES6</a></h6>
+              <span>三月 28, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-thumbnail">
+                <a href="/2019/03/21/this/" title=""><img width="50" height="50" src="https://inkn.github.io/pic/img/61687348_p0.jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
+              </div>
+              <div class="widget-entry-summary">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/03/21/this/">一句话道尽 this</a></h6>
               <span>三月 21, 2019</span>
             </div>
 
@@ -653,7 +660,7 @@ OSI 参考模型 与 TCP/IP 五层模型
 
             
               <div class="widget-entry-thumbnail">
-                <a href="/2019/03/18/JavaScript中的作用域与闭包/" title=""><img width="50" height="50" src="https://inkn.github.io/pic/img/Ghostblade%20(10).jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
+                <a href="/2019/03/18/JavaScript中的作用域与闭包/" title=""><img width="50" height="50" src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
               </div>
               <div class="widget-entry-summary">
             
@@ -709,21 +716,6 @@ OSI 参考模型 与 TCP/IP 五层模型
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-thumbnail">
-                <a href="/2019/03/03/网络协议/" title=""><img width="50" height="50" src="https://inkn.github.io/pic/img/Ghostblade9.jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
-              </div>
-              <div class="widget-entry-summary">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/03/03/网络协议/">网络协议总结</a></h6>
-              <span>三月 3, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -733,7 +725,7 @@ OSI 参考模型 与 TCP/IP 五层模型
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web前端/">Web前端</a><span class="category-list-count">8</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Three-js/">Three.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web前端/">Web前端</a><span class="category-list-count">9</span></li></ul>
     </div>
   </div>
 
@@ -743,7 +735,7 @@ OSI 参考模型 与 TCP/IP 五层模型
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebGL/">WebGL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础总结/">基础总结</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebGL/">WebGL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础总结/">基础总结</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -754,7 +746,7 @@ OSI 参考模型 与 TCP/IP 五层模型
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

@@ -153,6 +153,49 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-深入Javascript原理" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/03/29/深入Javascript原理/">深入Javascript原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/03/29/深入Javascript原理/" class="article-date">
+	  <time datetime="2019-03-29T01:06:17.000Z" itemprop="datePublished">三月 29, 2019</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-ES6上" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -177,35 +220,23 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><blockquote>
-<p>Symbol 是 ES6 中新增的一种原始类型。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(s1 == s2)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s1)  <span class="comment">// 'symbol'</span></span><br></pre></td></tr></table></figure>
-<p>Symbol 类型通过<strong>调用</strong> <code>Symbol()</code> 函数生成，每一个 Symbol 类型的值都是唯一的。<br>Symbol 类型可以<strong>私有化属性</strong></p>
-<p>普通闭包方式创建有私有属性的构造函数:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性</span></span><br><span class="line">    <span class="keyword">var</span> _gender</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params">name, gender</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        _gender = gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.getGender = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.setGender = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        _gender = n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> P</span><br><span class="line"> &#125;)()</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'张三'</span>, <span class="number">20</span>)</span><br><span class="line"> <span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 20</span></span><br><span class="line"> p.setGender(<span class="number">21</span>)</span><br><span class="line"> <span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure></p>
-<p>Symbol + 闭包实现私有化属性：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _gender = <span class="built_in">Symbol</span>(<span class="string">'gender'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params">name, gender</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        <span class="keyword">this</span>[_gender] = gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.getGender = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>[_gender]</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.setGender = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>[_gender] = n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> P</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'张三'</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p[<span class="built_in">Symbol</span>(<span class="string">'gender'</span>)])  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 20</span></span><br><span class="line">p.setGender(<span class="number">21</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure></p>
-<p>使用 Symbol + 闭包的方式私有化属性会安全一点，遇到的坑要少些。</p>
-<h2 id="let、const"><a href="#let、const" class="headerlink" title="let、const"></a>let、const</h2><h3 id="var-的特点"><a href="#var-的特点" class="headerlink" title="var 的特点"></a>var 的特点</h3><ul>
-<li>支持变量声明预解析</li>
-<li>不支持块级作用域</li>
-<li>可以重复声明</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// undefined</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-<h3 id="let、const-的特点"><a href="#let、const-的特点" class="headerlink" title="let、const 的特点"></a>let、const 的特点</h3><ul>
-<li>不支持变量声明预解析 (先声明后使用)</li>
-<li>支持块级作用域 </li>
-<li>不能重复声明 (暂时性死区)</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">const</span> b = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br><span class="line"><span class="keyword">let</span> c </span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>  <span class="comment">// Uncaught SyntaxError: Identifier 'c' has already been declared</span></span><br></pre></td></tr></table></figure>
-<p>不支持变量预解析和不支持变量的重复声明大大地提高了数据使用的安全性。所以 <code>var</code> 能不用则不用。</p>
-<h3 id="const-常量"><a href="#const-常量" class="headerlink" title="const 常量"></a>const 常量</h3><ul>
-<li>声明时就必须初始化</li>
-<li>初识化后就不能改变</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a <span class="comment">// Uncaught SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span>  <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br></pre></td></tr></table></figure>
-<p>const 在存对象的时候，存的是对象的引用(地址)，引用不能改变，但对象的内容却可以。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = &#123;</span><br><span class="line">    name: <span class="string">'张三'</span>, </span><br><span class="line">    age: <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line">p.age = <span class="number">21</span></span><br></pre></td></tr></table></figure>
+        
+          <div class="entry-thumbnail">
+            <a href="/2019/03/28/ES6上/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(14).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+          </div>
+          <div class="entry-summary">
+          Symbol
+Symbol 是 ES6 中新增的一种原始类型。
 
+
+var s1 = Symbol('s')var s2 = Symbol('s')console.log(s1 == s2)  // falseconsole.log(typeof s1)  // 'symbol'
+Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。Symbol ...
+
+        
+          <p class="article-more-link">
+            <a href="/2019/03/28/ES6上/#more">阅读全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -491,80 +522,6 @@ JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型
     
 
   
-    <article id="post-JavaScript中的变量类型和类型转换" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/05/JavaScript中的变量类型和类型转换/">JavaScript 中的变量类型和类型转换</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2019/03/05/JavaScript中的变量类型和类型转换/" class="article-date">
-	  <time datetime="2019-03-05T07:05:09.000Z" itemprop="datePublished">三月 5, 2019</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-          <div class="entry-thumbnail">
-            <a href="/2019/03/05/JavaScript中的变量类型和类型转换/"><img width="250" height="175" src="https://inkn.github.io/pic/img/Ghostblade%20(30).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
-          </div>
-          <div class="entry-summary">
-          
-JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。
-
-
-数据类型原始类型在 JS 中一共 6 种原始类型：
-
-string
-number
-boolean
-undefined
-null
-symbol (ECMAScript 6)
-
-对象类型
-除了原始类型其他的都是对象类型（object...
-
-        
-          <p class="article-more-link">
-            <a href="/2019/03/05/JavaScript中的变量类型和类型转换/#more">阅读全文</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础总结/">基础总结</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
@@ -666,6 +623,18 @@ symbol (ECMAScript 6)
           <li class="clearfix">
 
             
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/03/29/深入Javascript原理/">深入Javascript原理</a></h6>
+              <span>三月 29, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
               <div class="widget-entry-thumbnail">
                 <a href="/2019/03/28/ES6上/" title=""><img width="50" height="50" src="https://inknight.cn/pic/img/Ghostblade%20(14).jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
               </div>
@@ -738,21 +707,6 @@ symbol (ECMAScript 6)
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-thumbnail">
-                <a href="/2019/03/05/JavaScript中的变量类型和类型转换/" title=""><img width="50" height="50" src="https://inkn.github.io/pic/img/Ghostblade%20(30).jpg" class="attachment-thumb-small size-thumb-small wp-post-image" alt="preview-16" title=""></a>
-              </div>
-              <div class="widget-entry-summary">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/03/05/JavaScript中的变量类型和类型转换/">JavaScript 中的变量类型和类型转换</a></h6>
-              <span>三月 5, 2019</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -783,7 +737,7 @@ symbol (ECMAScript 6)
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

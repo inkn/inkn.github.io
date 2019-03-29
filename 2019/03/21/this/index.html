@@ -13,7 +13,7 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>一句话道尽 this | 墨夜</title>
+  <title>一语道尽 this | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="基础总结JavaScript">
@@ -24,15 +24,15 @@
   <meta name="description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一句话道尽 this">
+<meta property="og:title" content="一语道尽 this">
 <meta property="og:url" content="inknight.cn/2019/03/21/this/index.html">
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
-<meta property="og:updated_time" content="2019-03-28T12:22:13.881Z">
+<meta property="og:updated_time" content="2019-03-29T00:55:56.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一句话道尽 this">
+<meta name="twitter:title" content="一语道尽 this">
 <meta name="twitter:description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta name="twitter:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
   
@@ -178,7 +178,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      一句话道尽 this
+      一语道尽 this
     </h1>
   
 
@@ -202,7 +202,7 @@ var themeMenus = {};
 <p>this 的指向，apply、bind、call 一起搞定~</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 <strong><code>this</code> 一般是在函数调用时确定的</strong>。</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 <strong><code>this</code> 一般是在函数执行时确定的</strong>。</p>
 <h3 id="this-指向的是谁"><a href="#this-指向的是谁" class="headerlink" title="this 指向的是谁"></a>this 指向的是谁</h3><p>一般情况下，请记住 “<strong>谁调用我，我就代表谁</strong>“。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'foo'</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo() <span class="comment">// 'window'</span></span><br></pre></td></tr></table></figure>
 <p>执行 <code>foo()</code> 相当于执行 <code>window.foo()</code>(非严格模式) 也就是 <code>window</code> 调用了 foo 函数，所以 foo 函数体内的 <code>this</code> 指向的就是 <code>window</code> 对象。<br>当然如果是在 Node.js 环境下，上述 this 指向的就是 <code>globle</code> 对象了。</p>
@@ -213,9 +213,9 @@ var themeMenus = {};
 <h4 id="this-this"><a href="#this-this" class="headerlink" title="_this = this"></a><code>_this = this</code></h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    foo2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _this = <span class="keyword">this</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(_this.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.foo()  <span class="comment">// 'window'</span></span><br><span class="line">a.foo2()  <span class="comment">// 'a'</span></span><br></pre></td></tr></table></figure>
 <h4 id="apply、call、bind"><a href="#apply、call、bind" class="headerlink" title="apply、call、bind"></a>apply、call、bind</h4><p>apply 与 call 差不多，主要是传参不同，都是将 this 改变并执行函数，而 bind 是将函数返回但没执行。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + x + y)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.foo.call(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>)  <span class="comment">// 'window12'</span></span><br><span class="line">a.foo.apply(<span class="keyword">this</span>, [<span class="number">1</span>, <span class="number">2</span>])  <span class="comment">// 'window12'</span></span><br><span class="line"><span class="keyword">var</span> foo2 = a.foo.bind(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">foo2()  <span class="comment">// 'window12'</span></span><br></pre></td></tr></table></figure>
-<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数不绑定 this，没有自己的 this ，必须通过作用域链决定其值。</p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数不绑定 this，没有自己的 this ，必须通过作用域链决定其值。也就是 箭头函数中的 this 就是父级作用域中的 this</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;,</span><br><span class="line">    foo2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.foo()  <span class="comment">// 'window'</span></span><br><span class="line">a.foo2()  <span class="comment">// 'a'</span></span><br></pre></td></tr></table></figure>
-<h2 id="apply、bind、call-深入"><a href="#apply、bind、call-深入" class="headerlink" title="apply、bind、call 深入"></a>apply、bind、call 深入</h2>
+
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -260,11 +260,11 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
-    <a href="/2019/03/28/ES6/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/28/ES6上/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          ES6
+          攻入 ES6 系列 (上)
         
       </div>
     </a>
@@ -286,7 +286,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-number">1.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this-指向的是谁"><span class="nav-number">1.1.</span> <span class="nav-text">this 指向的是谁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变-this-的指向"><span class="nav-number">1.2.</span> <span class="nav-text">改变 this 的指向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new-实例化对象。"><span class="nav-number">1.2.1.</span> <span class="nav-text">new 实例化对象。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#this-this"><span class="nav-number">1.2.2.</span> <span class="nav-text">_this = this</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply、call、bind"><span class="nav-number">1.2.3.</span> <span class="nav-text">apply、call、bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数"><span class="nav-number">1.2.4.</span> <span class="nav-text">箭头函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apply、bind、call-深入"><span class="nav-number">2.</span> <span class="nav-text">apply、bind、call 深入</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-number">1.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this-指向的是谁"><span class="nav-number">1.1.</span> <span class="nav-text">this 指向的是谁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变-this-的指向"><span class="nav-number">1.2.</span> <span class="nav-text">改变 this 的指向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new-实例化对象。"><span class="nav-number">1.2.1.</span> <span class="nav-text">new 实例化对象。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#this-this"><span class="nav-number">1.2.2.</span> <span class="nav-text">_this = this</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply、call、bind"><span class="nav-number">1.2.3.</span> <span class="nav-text">apply、call、bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数"><span class="nav-number">1.2.4.</span> <span class="nav-text">箭头函数</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

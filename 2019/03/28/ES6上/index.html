@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>攻入 es6 系列 (上) | 墨夜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JavaScriptECMAScript6">
+  
+  
+  
+  
+  <meta name="description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。  var s1 = Symbol(&apos;s&apos;)var s2 = Symbol(&apos;s&apos;)console.log(s1 == s2)  // falseconsole.log(typeof s1)  // &apos;symbol&apos; Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。Symbol 类型可以">
+<meta name="keywords" content="JavaScript,ECMAScript6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻入 ES6 系列 (上)">
+<meta property="og:url" content="inknight.cn/2019/03/28/ES6上/index.html">
+<meta property="og:site_name" content="墨夜">
+<meta property="og:description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。  var s1 = Symbol(&apos;s&apos;)var s2 = Symbol(&apos;s&apos;)console.log(s1 == s2)  // falseconsole.log(typeof s1)  // &apos;symbol&apos; Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。Symbol 类型可以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(14).jpg">
+<meta property="og:updated_time" content="2019-03-29T01:03:14.456Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="攻入 ES6 系列 (上)">
+<meta name="twitter:description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。  var s1 = Symbol(&apos;s&apos;)var s2 = Symbol(&apos;s&apos;)console.log(s1 == s2)  // falseconsole.log(typeof s1)  // &apos;symbol&apos; Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。Symbol 类型可以">
+<meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(14).jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/categories"] = "分类"; 
+
+  themeMenus["/tags"] = "标签"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="墨夜" rel="home"> 墨夜 </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-ES6上" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(14).jpg" rel="gallery_cjttd6mj30000xsvcqed8u8uk">
+        <img src="https://inknight.cn/pic/img/Ghostblade%20(14).jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      攻入 ES6 系列 (上)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/03/28/ES6上/" class="article-date">
+	  <time datetime="2019-03-28T12:23:17.000Z" itemprop="datePublished">三月 28, 2019</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><blockquote>
+<p>Symbol 是 ES6 中新增的一种原始类型。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>(<span class="string">'s'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(s1 == s2)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s1)  <span class="comment">// 'symbol'</span></span><br></pre></td></tr></table></figure>
+<p>Symbol 类型通过<strong>调用</strong> <code>Symbol()</code> 函数生成，每一个 Symbol 类型的值都是唯一的。<br>Symbol 类型可以<strong>私有化属性</strong></p>
+<p>普通闭包方式创建有私有属性的构造函数:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性</span></span><br><span class="line">    <span class="keyword">var</span> _gender</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params">name, gender</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        _gender = gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.getGender = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> _gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.setGender = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        _gender = n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> P</span><br><span class="line"> &#125;)()</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'张三'</span>, <span class="number">20</span>)</span><br><span class="line"> <span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 20</span></span><br><span class="line"> p.setGender(<span class="number">21</span>)</span><br><span class="line"> <span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure></p>
+<p>Symbol + 闭包实现私有化属性：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _gender = <span class="built_in">Symbol</span>(<span class="string">'gender'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">P</span>(<span class="params">name, gender</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        <span class="keyword">this</span>[_gender] = gender</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.getGender = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>[_gender]</span><br><span class="line">    &#125;</span><br><span class="line">    P.prototype.setGender = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>[_gender] = n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> P</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'张三'</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p[<span class="built_in">Symbol</span>(<span class="string">'gender'</span>)])  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 20</span></span><br><span class="line">p.setGender(<span class="number">21</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p.getGender())  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 Symbol + 闭包的方式私有化属性会安全一点，遇到的坑要少些。</p>
+<h2 id="let、const"><a href="#let、const" class="headerlink" title="let、const"></a>let、const</h2><h3 id="var-的特点"><a href="#var-的特点" class="headerlink" title="var 的特点"></a>var 的特点</h3><ul>
+<li>支持变量声明预解析</li>
+<li>不支持块级作用域</li>
+<li>可以重复声明</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// undefined</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="let、const-的特点"><a href="#let、const-的特点" class="headerlink" title="let、const 的特点"></a>let、const 的特点</h3><ul>
+<li>不支持变量声明预解析 (先声明后使用)</li>
+<li>支持块级作用域 </li>
+<li>不能重复声明 (暂时性死区)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">const</span> b = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(b)  <span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br><span class="line"><span class="keyword">let</span> c </span><br><span class="line"><span class="keyword">let</span> c = <span class="number">3</span>  <span class="comment">// Uncaught SyntaxError: Identifier 'c' has already been declared</span></span><br></pre></td></tr></table></figure>
+<p>不支持变量预解析和不支持变量的重复声明大大地提高了数据使用的安全性。所以 <code>var</code> 能不用则不用。</p>
+<h3 id="const-常量"><a href="#const-常量" class="headerlink" title="const 常量"></a>const 常量</h3><ul>
+<li>声明时就必须初始化</li>
+<li>初识化后就不能改变</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a <span class="comment">// Uncaught SyntaxError: Missing initializer in const declaration</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span>  <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br></pre></td></tr></table></figure>
+<p>const 在存对象的时候，存的是对象的引用(地址)，引用不能改变，但对象的内容却可以。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = &#123;</span><br><span class="line">    name: <span class="string">'张三'</span>, </span><br><span class="line">    age: <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line">p.age = <span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MjM3Ni8xODkyMw==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/21/this/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">一语道尽 this</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let、const"><span class="nav-number">2.</span> <span class="nav-text">let、const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var-的特点"><span class="nav-number">2.1.</span> <span class="nav-text">var 的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let、const-的特点"><span class="nav-number">2.2.</span> <span class="nav-text">let、const 的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const-常量"><span class="nav-number">2.3.</span> <span class="nav-text">const 常量</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 墨夜 All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

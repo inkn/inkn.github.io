@@ -30,7 +30,7 @@
 <meta property="og:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(30).jpg">
-<meta property="og:updated_time" content="2019-03-30T00:50:32.896Z">
+<meta property="og:updated_time" content="2019-04-01T01:38:22.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 中的变量类型和类型转换">
 <meta name="twitter:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
@@ -190,11 +190,11 @@ var themeMenus = {};
 	  <time datetime="2019-03-05T07:05:09.000Z" itemprop="datePublished">三月 5, 2019</time>
 	</a>
 
-      
+      <!-- 
 	<span id="busuanzi_container_page_pv">
 	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 	</span>
-
+ ** -->
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -238,7 +238,10 @@ var themeMenus = {};
 <p><code>instanceof</code> 运算符返回一个布尔值，用于测试构造函数的 <code>prototype</code> 属性是否存在于对象<strong>原型链</strong>上。所以在判断对象的正确类型时可以考虑使用 <code>instanceof</code> 。</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B()</span><br><span class="line"></span><br><span class="line">a <span class="keyword">instanceof</span> A  <span class="comment">// true ，因为 Object.getPrototypeOf(a) === a.prototype</span></span><br><span class="line"></span><br><span class="line">a <span class="keyword">instanceof</span> B  <span class="comment">// false ，B.prototype 不在 a 的原型链上</span></span><br></pre></td></tr></table></figure>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h3><h4 id="Number"><a href="#Number" class="headerlink" title="Number()"></a><strong><code>Number()</code></strong></h4><ul>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><blockquote>
+<p>任意数据类型之间可以相互转换，但是 <strong>symbol</strong> 特殊。symbol 类型只能转换成 <strong>string</strong> 类型，其他的转换会报错。 </p>
+</blockquote>
+<h3 id="强制转换"><a href="#强制转换" class="headerlink" title="强制转换"></a>强制转换</h3><h4 id="Number"><a href="#Number" class="headerlink" title="Number()"></a><strong><code>Number()</code></strong></h4><ul>
 <li>原始类型 —&gt; 数字</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 字符串 ---&gt; 数字</span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 1) 可以被解析成数值的字符串 返回 数值</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="string">'123'</span>)  <span class="comment">// 123</span></span><br><span class="line">    <span class="comment">// 2) 不能解析成数值的字符串 返回 NaN</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="string">'123aaa'</span>)  <span class="comment">// NaN</span></span><br><span class="line">    <span class="comment">// 3) 空串 ---&gt; 0</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="string">''</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 布尔值 ---&gt; 数字</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1) true ---&gt; 1</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="literal">true</span>)  <span class="comment">// 1</span></span><br><span class="line">    <span class="comment">// 2) false ---&gt; 0</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="literal">false</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. undefined ---&gt; NaN</span></span><br><span class="line">    <span class="built_in">Number</span>(<span class="literal">undefined</span>)  <span class="comment">// NaN</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 4. null ---&gt; 0</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)  <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
@@ -247,7 +250,7 @@ var themeMenus = {};
 <ul>
 <li>对象 —&gt; 数字</li>
 </ul>
-<p><code>Number()</code> 方法的参数是对象时，除非是包含单个参数的数组会返回数字，否则返回 <code>NaN</code> 。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">1</span>,<span class="number">2</span>])   <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">1</span>])     <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
+<p><code>Number()</code> 方法的参数是对象时，一般情况下，除非是包含单个数字的数组会返回数字，否则返回 <code>NaN</code> 。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">1</span>,<span class="number">2</span>])   <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">1</span>])     <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
 <p>在执行 <code>Number(对象)</code> 方法时，会先进行参数处理，将对象转换成原始类型，再进行转换成数字的操作。</p>
 <ol>
 <li>第一步，调用对象自身的 <strong><code>valueOf()</code></strong> 方法（ var a = new String(123); a.valueOf() –&gt; ‘123’ ）。如果返回的值是原始类型，则直接将该值转换成数字并返回。不再进行后续步骤。</li>
@@ -259,12 +262,13 @@ var themeMenus = {};
 <p><code>String()</code> 函数可以将任意类型的值转换成字符串。</p>
 </blockquote>
 <ul>
-<li><p>原始类型 —&gt; 字符串</p>
-</li>
-<li><p>对象 —&gt; 字符串<br>数组会返回该数组的字符串形式，函数返回完整函数的字符串，其他的返回一个类型字符串。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// '[object Object]'</span></span><br><span class="line"><span class="built_in">String</span>([<span class="number">1</span>,<span class="number">2</span>])  <span class="comment">// '1,2'</span></span><br><span class="line">string([])  <span class="comment">// ''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x*x &#125;</span><br><span class="line"><span class="built_in">String</span>(foo)  <span class="comment">//  'function foo(x)&#123; return x*x &#125;'</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>原始类型 —&gt; 字符串</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">Symbol</span>(&#123;&#125;)</span><br><span class="line"><span class="built_in">String</span>(a)  <span class="comment">// 'Symbol([object Object])'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>(<span class="built_in">Symbol</span>([]))  <span class="comment">// 'Symbol()'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>对象 —&gt; 字符串<br>数组会返回该数组的字符串形式，函数返回完整函数的字符串，其他的返回一个类型字符串。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">String</span>([<span class="number">1</span>,<span class="number">2</span>])  <span class="comment">// '1,2'</span></span><br><span class="line"><span class="built_in">String</span>([])  <span class="comment">// ''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x*x &#125;</span><br><span class="line"><span class="built_in">String</span>(foo)  <span class="comment">//  'function foo(x)&#123; return x*x &#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;)  <span class="comment">// '[object Object]'</span></span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].toString() <span class="comment">// '1,2,3'</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])  <span class="comment">// '[object Array]'</span></span><br></pre></td></tr></table></figure>
 <p><strong><code>String(对象)</code></strong> 方法的转换规则与 <strong><code>Number(对象)</code></strong> 基本相同，只是互换了 <strong><code>valueOf()</code></strong> 与 <strong><code>toString()</code></strong> 的执行顺序。</p>
 <ol>
 <li>先调用对象的 <strong><code>toString()</code></strong> 方法。如果返回的值是原始类型，则将该值转换成字符串并返回。不再执行以下步骤。</li>
@@ -310,7 +314,8 @@ var themeMenus = {};
 <li><code>null</code> <code>undefined</code> 除了 <code>null(undefined) == undefined(null)</code> 返回 <code>true</code>，其他 <code>&gt;</code> <code>&lt;</code> <code>==</code> 有 <code>null</code> 或 <code>undefined</code> 参与的都返回 <code>false</code> 。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="string">'abc'</span> &gt; <span class="string">'abd'</span>  <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> &gt; <span class="literal">false</span>  <span class="comment">// true  ---&gt; Number(true) &gt; Number(false)</span></span><br><span class="line"><span class="literal">true</span> &gt; <span class="string">'-1'</span>  <span class="comment">// true  ---&gt; Number(true) &gt; Number('-1')</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">valueOf</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="string">'1'</span>&#125;&#125;</span><br><span class="line">[<span class="number">3</span>] &gt; obj  <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 过程如下：</span></span><br><span class="line"><span class="comment">// Number([3]) &gt; Number(obj)</span></span><br><span class="line"><span class="comment">// Number('3') &gt; Number('1')</span></span><br><span class="line"><span class="comment">// 3 &gt; 1</span></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> == <span class="literal">null</span>  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><code>==</code> 常用于判断函数的参数是否等于 <code>null</code> 或者 <code>undefined</code> ，因为 <code>null == undefinded</code> 返回 <code>true</code><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function fun(x) &#123;</span><br><span class="line">    if(x == null) &#123;···&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>==</code> 常用于判断函数的参数是否等于 <code>null</code> 或者 <code>undefined</code> ，因为 <code>null == undefinded</code> 返回 <code>true</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="literal">null</span>) &#123;···&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><ul>
 <li><code>!参数</code> </li>
 <li><code>参数&amp;&amp;</code> </li>
@@ -404,10 +409,10 @@ var themeMenus = {};
       <div class="site-info">
 	      &copy; 2019 墨夜 All Rights Reserved.
           
-            <span id="busuanzi_container_site_uv">
+            <!-- <span id="busuanzi_container_site_uv">
               本站访客数<span id="busuanzi_value_site_uv"></span>人次  
               本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
+            </span> -->
           
       </div>
       <div class="site-credit">

@@ -29,12 +29,12 @@
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://inknight.cn/pic/img/61687348_p0.jpg">
-<meta property="og:updated_time" content="2019-03-30T00:50:26.231Z">
+<meta property="og:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
+<meta property="og:updated_time" content="2019-04-01T00:53:54.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一语道尽 this">
 <meta name="twitter:description" content="this 的指向，apply、bind、call 一起搞定~">
-<meta name="twitter:image" content="https://inknight.cn/pic/img/61687348_p0.jpg">
+<meta name="twitter:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
   
@@ -166,8 +166,8 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/61687348_p0.jpg" rel="gallery_cjttdckxs0012jgvcy5q5iujy">
-        <img src="https://inknight.cn/pic/img/61687348_p0.jpg" itemprop="image">
+      <a class="article-gallery-img fancybox" href="https://inkn.github.io/pic/img/61687348_p0.jpg" rel="gallery_cjttdckxs0012jgvcy5q5iujy">
+        <img src="https://inkn.github.io/pic/img/61687348_p0.jpg" itemprop="image">
       </a>
     
   </div>
@@ -190,11 +190,11 @@ var themeMenus = {};
 	  <time datetime="2019-03-21T02:31:44.000Z" itemprop="datePublished">三月 21, 2019</time>
 	</a>
 
-      
+      <!-- 
 	<span id="busuanzi_container_page_pv">
 	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 	</span>
-
+ ** -->
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -203,7 +203,7 @@ var themeMenus = {};
 </blockquote>
 <a id="more"></a>
 <h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 <strong><code>this</code> 一般是在函数执行时确定的</strong>。</p>
-<h3 id="this-指向的是谁"><a href="#this-指向的是谁" class="headerlink" title="this 指向的是谁"></a>this 指向的是谁</h3><p>一般情况下，请记住 “<strong>谁调用我，我就代表谁</strong>“。</p>
+<h3 id="this-指向的是谁"><a href="#this-指向的是谁" class="headerlink" title="this 指向的是谁"></a>this 指向的是谁</h3><p>一般情况下，请记住 “<strong>谁调用我，我就代表谁</strong>“。<br>谁调用这个函数，函数中的 this 就指向谁。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'foo'</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo() <span class="comment">// 'window'</span></span><br></pre></td></tr></table></figure>
 <p>执行 <code>foo()</code> 相当于执行 <code>window.foo()</code>(非严格模式) 也就是 <code>window</code> 调用了 foo 函数，所以 foo 函数体内的 <code>this</code> 指向的就是 <code>window</code> 对象。<br>当然如果是在 Node.js 环境下，上述 this 指向的就是 <code>globle</code> 对象了。</p>
 <p>匿名函数中的 this 也是指向全局对象的。</p>
@@ -300,10 +300,10 @@ var themeMenus = {};
       <div class="site-info">
 	      &copy; 2019 墨夜 All Rights Reserved.
           
-            <span id="busuanzi_container_site_uv">
+            <!-- <span id="busuanzi_container_site_uv">
               本站访客数<span id="busuanzi_value_site_uv"></span>人次  
               本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
+            </span> -->
           
       </div>
       <div class="site-credit">

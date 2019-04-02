@@ -18,3 +18,21 @@ $("#homelogo").click(function() {
     }, 1000, null);
     return false;
 });
+
+var toc = document.getElementById('toc')
+
+if (toc != null) {
+	window.addEventListener("scroll", scrollcatelogHandler);
+	var tocPosition = 194+25;
+
+	function scrollcatelogHandler(e) {
+		 var event = e || window.event,
+		     target = event.target || event.srcElement;
+		 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		 if (scrollTop > tocPosition) {
+		     toc.classList.add("toc-fixed");
+		 } else {
+		     toc.classList.remove("toc-fixed");
+		 }
+	}
+}

@@ -178,22 +178,60 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
-          <div class="entry-thumbnail">
-            <a href="/2019/03/29/深入Javascript原理/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(59).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
-          </div>
-          <div class="entry-summary">
-          call 模拟实现
-更改函数的 this 指向并执行函数。
+        <h2 id="call-模拟实现"><a href="#call-模拟实现" class="headerlink" title="call 模拟实现"></a>call 模拟实现</h2><blockquote>
+<p>更改函数的 this 指向并执行函数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span></span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> args = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">       args.push(<span class="string">'arguments['</span> + i + <span class="string">']'</span>) </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="built_in">eval</span>(<span class="string">'context.fn('</span> + args + <span class="string">')'</span>)</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析：</p>
+<ul>
+<li>首先 <code>context</code> 作为可选参数，如果不传或传 <code>null</code> ，默认上下文为 <code>window</code></li>
+<li>然后给上下文 <code>context</code> 添加方法 <code>fn</code> ，<code>fn</code> 就是要执行的函数，谁调用了 call() , <code>fn</code> 就是谁。 所以 <code>context.fn = this</code></li>
+<li>call 还可以传入多个参数作为调用的函数的参数，可以通过 arguments 对象获取函数的参数。</li>
+<li>最后调用函数保存返回值，删除给对象添加的 <code>fn</code> ，将结果返回。</li>
+</ul>
+<p>核心就是，通过将函数添加到对象上，然后通过对象调用这个函数，从而使函数中的 this 指向这个对象。</p>
+<p>更简洁的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...rest</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span> </span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> result  = context.fn(...rest)</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="apply-模拟实现"><a href="#apply-模拟实现" class="headerlink" title="apply 模拟实现"></a>apply 模拟实现</h2><blockquote>
+<p>apply 实现与 call 类似，区别在于对参数的处理</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span></span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> result</span><br><span class="line">    <span class="keyword">if</span>(!arr) &#123;</span><br><span class="line">        result = context.fn()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> args = []</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            args.push(<span class="string">'arr['</span> + i + <span class="string">']'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        result = <span class="built_in">eval</span>(<span class="string">'context.fn('</span> + args + <span class="string">')'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简洁：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span> </span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> result </span><br><span class="line">    <span class="keyword">if</span>(arr) &#123;</span><br><span class="line">        result = context.fn(...arr)</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        result = context.fn()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="bind-模拟实现"><a href="#bind-模拟实现" class="headerlink" title="bind 模拟实现"></a>bind 模拟实现</h2><blockquote>
+<p>bind 方法返回一个改变 this 指向的函数，bind 第一个参数作为这个函数的 this，后续参数会在函数调用时，作为函数的参数传入，然后才会传入函数的实参。</p>
+</blockquote>
+<p>举个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'name:'</span> + name + <span class="string">'age:'</span> + age)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f =  foo.bind(<span class="literal">null</span>,<span class="string">'张三'</span>)</span><br><span class="line">f(<span class="number">20</span>)  <span class="comment">// name:张三age:20</span></span><br></pre></td></tr></table></figure></p>
+<p>实现：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args2 = [].slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">        <span class="keyword">var</span> arglist = args.concat(args2)</span><br><span class="line">        <span class="keyword">return</span> self.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> F ? <span class="keyword">this</span>: context, arglist)</span><br><span class="line">    &#125;</span><br><span class="line">    F.prototype = <span class="built_in">Object</span>.create(self.prototype)</span><br><span class="line">    <span class="keyword">return</span> F</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简洁版：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> args = [...arguments].slice(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> self.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> F ? <span class="keyword">this</span> : context,args.concat(...arguments))</span><br><span class="line">    &#125;</span><br><span class="line">    F.prototype = <span class="built_in">Object</span>.create(self.prototype)</span><br><span class="line">    <span class="keyword">return</span> F</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind 返回的是一个函数，<br>并在这个函数里面返回 <code>原函数.apply()</code> 实现改变 this 。  </li>
+<li>需注意的是：如果 bind 返回的函数作为构造函数执行时(new 函数)，this 不能改成传入的 <code>context</code> ，this 应该是声明的变量。  </li>
+<li>bind() 传入的除 <code>context</code> 的后续参数，先存起来，在调用由 bind 返回的新函数时 ，向 apply() 传入由原来存的参数和新传入的参数组成的数组(注意顺序)。 </li>
+</ul>
+<h2 id="new-模拟实现"><a href="#new-模拟实现" class="headerlink" title="new 模拟实现"></a>new 模拟实现</h2><blockquote>
+<p>new 运算符创建了一个用户自定义类型的实例</p>
+</blockquote>
+<p>在执行 <code>new 构造函数()</code> 时，发生了：</p>
+<ol>
+<li>生成一个新对象</li>
+<li>将对象的原型引用(<code>__proto__</code>)指向构造函数的原型</li>
+<li>绑定 this 为该对象，执行构造函数中的内容</li>
+<li>返回新对象</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">constructor</span> = [].shift.call(arguments)</span><br><span class="line">    var obj = Object.create(<span class="keyword">constructor</span>.prototype)</span><br><span class="line">    var res = <span class="keyword">constructor</span>.apply(obj, arguments)</span><br><span class="line">    return res instanceof Object ? res: obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ES6 简洁版：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">constructor, ...rest</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> obj = <span class="built_in">Object</span>.create(<span class="keyword">constructor</span>.prototype)</span><br><span class="line">    let res = <span class="keyword">constructor</span>.apply(obj, rest)</span><br><span class="line">    return res instanceof Object ? res : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><blockquote>
+<p>能正确判断对象的类型，原理是判断构造函数的原型对象是否能在对象的原型链上</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myInstanceof</span>(<span class="params">obj, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> prototype = fn.prototype</span><br><span class="line">    <span class="keyword">let</span> objProto = obj.__proto__</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(objProto == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span>(objProto === prototype)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    objProto = objProto.__proto__</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>获得构造函数的原型</li>
+<li>获得实例对象的原型</li>
+<li>判断构造函数的原型是否就是实例对象的原型，如果是就返回 true ，不是就让实例对象的原型指向自身的原型继续判断，直到实例对象的原型为 null，返回 false</li>
+</ol>
 
-
-Function.prototype.myCall = function(context) &#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &lt; arguments.leng...
-
-        
-          <p class="article-more-link">
-            <a href="/2019/03/29/深入Javascript原理/#more">阅读全文</a>
-          </p>
-        </div>
       
     </div>
     <footer class="entry-meta entry-footer">

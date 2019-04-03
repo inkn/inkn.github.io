@@ -22,19 +22,19 @@
   
   
   
-  <meta name="description" content="call 模拟实现 更改函数的 this 指向并执行函数。  Function.prototype.myCall = function(context) &amp;#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &amp;lt; arguments.length;">
+  <meta name="description" content="call 模拟实现 更改函数的 this 指向并执行函数。">
 <meta name="keywords" content="JavaScript,基础进阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入Javascript原理">
 <meta property="og:url" content="inknight.cn/2019/03/29/深入Javascript原理/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="call 模拟实现 更改函数的 this 指向并执行函数。  Function.prototype.myCall = function(context) &amp;#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &amp;lt; arguments.length;">
+<meta property="og:description" content="call 模拟实现 更改函数的 this 指向并执行函数。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(59).jpg">
-<meta property="og:updated_time" content="2019-04-03T00:09:03.238Z">
+<meta property="og:updated_time" content="2019-04-03T00:45:18.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入Javascript原理">
-<meta name="twitter:description" content="call 模拟实现 更改函数的 this 指向并执行函数。  Function.prototype.myCall = function(context) &amp;#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &amp;lt; arguments.length;">
+<meta name="twitter:description" content="call 模拟实现 更改函数的 this 指向并执行函数。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(59).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -202,8 +202,8 @@ var themeMenus = {};
         <h2 id="call-模拟实现"><a href="#call-模拟实现" class="headerlink" title="call 模拟实现"></a>call 模拟实现</h2><blockquote>
 <p>更改函数的 this 指向并执行函数。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span></span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> args = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">       args.push(<span class="string">'arguments['</span> + i + <span class="string">']'</span>) </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="built_in">eval</span>(<span class="string">'context.fn('</span> + args + <span class="string">')'</span>)</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = context || <span class="built_in">window</span></span><br><span class="line">    context.fn = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">var</span> args = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">       args.push(<span class="string">'arguments['</span> + i + <span class="string">']'</span>) </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="built_in">eval</span>(<span class="string">'context.fn('</span> + args + <span class="string">')'</span>)</span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分析：</p>
 <ul>
 <li>首先 <code>context</code> 作为可选参数，如果不传或传 <code>null</code> ，默认上下文为 <code>window</code></li>
@@ -239,7 +239,7 @@ var themeMenus = {};
 <li>生成一个新对象</li>
 <li>将对象的原型引用(<code>__proto__</code>)指向构造函数的原型</li>
 <li>绑定 this 为该对象，执行构造函数中的内容</li>
-<li>返回新对象</li>
+<li>如果函数执行的返回值是对象，就返回这个对象，否则返回之前创建的新对象</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">constructor</span> = [].shift.call(arguments)</span><br><span class="line">    var obj = Object.create(<span class="keyword">constructor</span>.prototype)</span><br><span class="line">    var res = <span class="keyword">constructor</span>.apply(obj, arguments)</span><br><span class="line">    return res instanceof Object ? res: obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>ES6 简洁版：</p>

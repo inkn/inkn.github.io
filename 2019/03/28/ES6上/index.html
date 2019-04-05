@@ -14,7 +14,7 @@
   PACE Progress Bar START -->
 
   
-  <title>攻入 es6 系列 (上) | 墨夜</title>
+  <title>es6 系列 (上) | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="JavaScriptECMAScript6">
@@ -25,15 +25,15 @@
   <meta name="description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。">
 <meta name="keywords" content="JavaScript,ECMAScript6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="攻入 ES6 系列 (上)">
+<meta property="og:title" content="ES6 系列 (上)">
 <meta property="og:url" content="inknight.cn/2019/03/28/ES6上/index.html">
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(14).jpg">
-<meta property="og:updated_time" content="2019-04-04T00:25:53.341Z">
+<meta property="og:updated_time" content="2019-04-05T10:39:38.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="攻入 ES6 系列 (上)">
+<meta name="twitter:title" content="ES6 系列 (上)">
 <meta name="twitter:description" content="Symbol Symbol 是 ES6 中新增的一种原始类型。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(14).jpg">
   
@@ -179,7 +179,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      攻入 ES6 系列 (上)
+      ES6 系列 (上)
     </h1>
   
 
@@ -302,20 +302,20 @@ var themeMenus = {};
 <p>默认可以迭代的对象：</p>
 <ul>
 <li>数组</li>
+<li>字符串</li>
 <li>Set</li>
 <li>Map</li>
 <li>类数组对象，如 arguments，DOM 里的 NodeList</li>
 <li>Generator 对象</li>
-<li>字符串</li>
 </ul>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>(参数) =&gt; {函数体}<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 只有一个参数可以不写 ()</span></span><br><span class="line">x =&gt; &#123;<span class="built_in">console</span>.log(x)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 只有一条语句可以不写 &#123;&#125; ，并且将语句的结果返回</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="params">x</span> =&gt;</span> x*x</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">2</span>))  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>(参数) =&gt; {函数体}<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 只有一个参数可以不写 ()</span></span><br><span class="line">x =&gt; &#123;<span class="built_in">console</span>.log(x)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数体中只有一条语句可以不写 &#123;&#125; ，该条语句的结果会作为函数的返回值</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="params">x</span> =&gt;</span> x*x</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">2</span>))  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>内部不绑定 this ，访问外部作用域的 this 。</li>
-<li>不能作为构造函数</li>
 <li>内部没由 <code>arguments</code></li>
+<li>不能作为构造函数</li>
 <li>不能作为生成器函数</li>
 </ul>
-<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>集合：类似于数组，但成员的值都是唯一的，没有重复的值，并且时无序的。<br><code>Set()</code> 是一个构造函数，可以传入一个可迭代对象初始化默认值</p>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>集合：类似于数组，但成员的值都是唯一的，没有重复的值，并且无序。<br><code>Set()</code> 是一个构造函数，可以传入一个可迭代对象初始化默认值</p>
 <p>数组去重：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">arr = [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line"><span class="built_in">console</span>.log(arr)  <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
 <h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>映射：<br>类似于对象，但是 key 值可以是任意类型的值，而不仅仅局限于字符串。</p>

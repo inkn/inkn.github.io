@@ -14,7 +14,7 @@
   PACE Progress Bar START -->
 
   
-  <title>javascript 中的变量类型和类型转换 | 墨夜</title>
+  <title>javascript 中的数据类型类型和类型转换 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="基础总结JavaScript">
@@ -25,15 +25,15 @@
   <meta name="description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 中的变量类型和类型转换">
+<meta property="og:title" content="JavaScript 中的数据类型类型和类型转换">
 <meta property="og:url" content="inknight.cn/2019/03/05/JavaScript中的变量类型和类型转换/index.html">
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(30).jpg">
-<meta property="og:updated_time" content="2019-04-01T01:38:22.544Z">
+<meta property="og:updated_time" content="2019-04-04T08:39:20.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 中的变量类型和类型转换">
+<meta name="twitter:title" content="JavaScript 中的数据类型类型和类型转换">
 <meta name="twitter:description" content="JavaScript 是一种弱类型或者说动态类型语言。所以你不用提前声明变量的类型，在程序运行时，类型会被自动确定，你也可以使用同一个变量保存不同类型的数据。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(30).jpg">
   
@@ -179,7 +179,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      JavaScript 中的变量类型和类型转换
+      JavaScript 中的数据类型类型和类型转换
     </h1>
   
 
@@ -221,7 +221,7 @@ var themeMenus = {};
 <p>原始类型数据直接存储在 <strong>栈内存(stack)</strong> 中，对象数据存储在 <strong>堆内存(heap)</strong> 中，并在 <strong>栈内存</strong> 中存放了该对象数据在 <strong>堆内存</strong>的<strong>地址(引用)</strong>。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a1 = <span class="number">0</span>  <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">var</span> a2 = <span class="string">'this is string'</span>  <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">var</span> a3 = <span class="literal">null</span>  <span class="comment">// 栈</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = &#123; <span class="attr">m</span>: <span class="number">20</span> &#125;  <span class="comment">// 堆</span></span><br><span class="line"><span class="keyword">var</span> c = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]  <span class="comment">// 堆</span></span><br></pre></td></tr></table></figure>
 <p>上述变量的内存图解：<br><img src="https://inknight.cn/pic/note/变量内存.png" alt="变量内存"></p>
-<h2 id="typeof-与-instanceof"><a href="#typeof-与-instanceof" class="headerlink" title="typeof 与 instanceof"></a>typeof 与 instanceof</h2><blockquote>
+<h2 id="判断变量的类型"><a href="#判断变量的类型" class="headerlink" title="判断变量的类型"></a>判断变量的类型</h2><blockquote>
 <p>typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</p>
 </blockquote>
 <h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a><code>typeof</code></h3><blockquote>
@@ -239,6 +239,13 @@ var themeMenus = {};
 <p><code>instanceof</code> 运算符返回一个布尔值，用于测试构造函数的 <code>prototype</code> 属性是否存在于对象<strong>原型链</strong>上。所以在判断对象的正确类型时可以考虑使用 <code>instanceof</code> 。</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B()</span><br><span class="line"></span><br><span class="line">a <span class="keyword">instanceof</span> A  <span class="comment">// true ，因为 Object.getPrototypeOf(a) === a.prototype</span></span><br><span class="line"></span><br><span class="line">a <span class="keyword">instanceof</span> B  <span class="comment">// false ，B.prototype 不在 a 的原型链上</span></span><br></pre></td></tr></table></figure>
+<p>但是在浏览器环境下，我们的脚本可能要在多个窗口（不同 iframe）之间进行交互。多个窗口意味着多个全局环境，不同全局环境拥有不同的全局对象，从而拥有不同的内置构造函数。这会使得 instanceof 会出现一些问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>)    </span><br><span class="line"><span class="built_in">document</span>.body.appendChild(iframe)    </span><br><span class="line">xArray = <span class="built_in">window</span>.frames[<span class="built_in">window</span>.frames.length<span class="number">-1</span>].Array       </span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> xArray(<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>)  <span class="comment">//这个写法IE大哥下是不支持的，FF下才有</span></span><br><span class="line">       </span><br><span class="line">alert(arr <span class="keyword">instanceof</span> <span class="built_in">Array</span>)  <span class="comment">// false </span></span><br><span class="line">alert(arr.constructor === <span class="built_in">Array</span>)  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="Object-prototype-toString-call-变量"><a href="#Object-prototype-toString-call-变量" class="headerlink" title="Object.prototype.toString.call(变量)"></a>Object.prototype.toString.call(变量)</h3><blockquote>
+<p>是更为放心的方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]) === <span class="string">'[object Array]'</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) === <span class="string">'[object Object]'</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> Person())  <span class="comment">// '[object Object]'</span></span><br></pre></td></tr></table></figure>
+<p>也有缺点，就是用户自定义的类型返回是 ‘[object Object]’</p>
 <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><blockquote>
 <p>任意数据类型之间可以相互转换，但是 <strong>symbol</strong> 特殊。symbol 类型只能转换成 <strong>string</strong> 类型，其他的转换会报错。 </p>
 </blockquote>
@@ -396,7 +403,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始类型"><span class="nav-number">1.1.</span> <span class="nav-text">原始类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类型"><span class="nav-number">1.2.</span> <span class="nav-text">对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存空间"><span class="nav-number">1.3.</span> <span class="nav-text">内存空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typeof-与-instanceof"><span class="nav-number">2.</span> <span class="nav-text">typeof 与 instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">2.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制转换"><span class="nav-number">3.1.</span> <span class="nav-text">强制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">3.1.1.</span> <span class="nav-text">Number()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">3.1.2.</span> <span class="nav-text">String()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean"><span class="nav-number">3.1.3.</span> <span class="nav-text">Boolean()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动转换"><span class="nav-number">3.2.</span> <span class="nav-text">自动转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进行算术运算"><span class="nav-number">3.2.1.</span> <span class="nav-text">进行算术运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行比较运算"><span class="nav-number">3.2.2.</span> <span class="nav-text">进行比较运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算"><span class="nav-number">3.2.3.</span> <span class="nav-text">逻辑运算</span></a></li></ol></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始类型"><span class="nav-number">1.1.</span> <span class="nav-text">原始类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象类型"><span class="nav-number">1.2.</span> <span class="nav-text">对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存空间"><span class="nav-number">1.3.</span> <span class="nav-text">内存空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断变量的类型"><span class="nav-number">2.</span> <span class="nav-text">判断变量的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">2.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">2.2.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-call-变量"><span class="nav-number">2.3.</span> <span class="nav-text">Object.prototype.toString.call(变量)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制转换"><span class="nav-number">3.1.</span> <span class="nav-text">强制转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">3.1.1.</span> <span class="nav-text">Number()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">3.1.2.</span> <span class="nav-text">String()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean"><span class="nav-number">3.1.3.</span> <span class="nav-text">Boolean()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动转换"><span class="nav-number">3.2.</span> <span class="nav-text">自动转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进行算术运算"><span class="nav-number">3.2.1.</span> <span class="nav-text">进行算术运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进行比较运算"><span class="nav-number">3.2.2.</span> <span class="nav-text">进行比较运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算"><span class="nav-number">3.2.3.</span> <span class="nav-text">逻辑运算</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>

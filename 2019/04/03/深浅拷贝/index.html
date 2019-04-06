@@ -22,19 +22,19 @@
   
   
   
-  <meta name="description" content="对象的赋值操作其实是对地址的复制，而拷贝就是把对象复制一份再赋给变量。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
+  <meta name="description" content="对象的赋值操作其实是对地址的复制，而拷贝就是创建一个新对象然后把原对象的属性复制到这个新对象中。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
 <meta name="keywords" content="JavaScript,基础进阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深浅拷贝">
 <meta property="og:url" content="inknight.cn/2019/04/03/深浅拷贝/index.html">
 <meta property="og:site_name" content="墨夜">
-<meta property="og:description" content="对象的赋值操作其实是对地址的复制，而拷贝就是把对象复制一份再赋给变量。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
+<meta property="og:description" content="对象的赋值操作其实是对地址的复制，而拷贝就是创建一个新对象然后把原对象的属性复制到这个新对象中。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(60).jpg">
-<meta property="og:updated_time" content="2019-04-06T01:01:08.194Z">
+<meta property="og:updated_time" content="2019-04-06T01:28:45.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深浅拷贝">
-<meta name="twitter:description" content="对象的赋值操作其实是对地址的复制，而拷贝就是把对象复制一份再赋给变量。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
+<meta name="twitter:description" content="对象的赋值操作其实是对地址的复制，而拷贝就是创建一个新对象然后把原对象的属性复制到这个新对象中。  多个变量指向同一个对象，会导致牵一发而动全身的情况出现。">
 <meta name="twitter:image" content="https://inknight.cn/pic/img/Ghostblade%20(60).jpg">
   
     <link rel="alternate" href="/atom.xml" title="墨夜" type="application/atom+xml">
@@ -200,7 +200,7 @@ var themeMenus = {};
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>对象的赋值操作其实是对地址的复制，而拷贝就是把对象复制一份再赋给变量。</p>
+<p>对象的赋值操作其实是对地址的复制，而拷贝就是创建一个新对象然后把原对象的属性复制到这个新对象中。</p>
 </blockquote>
 <p>多个变量指向同一个对象，会导致牵一发而动全身的情况出现。</p>
 <a id="more"></a>
@@ -208,7 +208,7 @@ var themeMenus = {};
 <h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><blockquote>
 <p>把对象中的属性复制到新对象中，但是如果这个属性是对象，复制的是地址。</p>
 </blockquote>
-<p>实现很简单，就是遍历对象，然后把对象的属性和属性值都对应的放在新对象上。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果传入参数的不是对象，就返回传入的参数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !==<span class="string">'object'</span> || obj === <span class="literal">null</span>) <span class="keyword">return</span> obj</span><br><span class="line">    <span class="comment">// obj 是数组的话，返回的新对象也应是数组</span></span><br><span class="line">    <span class="keyword">var</span> newObj = obj <span class="keyword">instanceof</span> <span class="built_in">Array</span> ? [] : &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key)) &#123;</span><br><span class="line">            newObj[key] = obj[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newObj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">age</span>: <span class="number">1</span>, <span class="attr">foo</span>:&#123;<span class="attr">x</span>:<span class="number">100</span>&#125;&#125;</span><br><span class="line"><span class="keyword">var</span> b = shallowClone(a)</span><br><span class="line"></span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line">a.foo.x = <span class="number">200</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age)  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(b.foo)  <span class="comment">// &#123;x: 200&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>实现很简单，就是遍历对象，然后把对象自身的属性和属性值都对应的放在新对象上。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果传入参数的不是对象，就返回传入的参数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> obj !==<span class="string">'object'</span> || obj === <span class="literal">null</span>) <span class="keyword">return</span> obj</span><br><span class="line">    <span class="comment">// obj 是数组的话，返回的新对象也应是数组</span></span><br><span class="line">    <span class="keyword">var</span> newObj = <span class="built_in">Array</span>.isArray(obj) ? [] : &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.hasOwnProperty(key)) &#123;</span><br><span class="line">            newObj[key] = obj[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newObj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">age</span>: <span class="number">1</span>, <span class="attr">foo</span>:&#123;<span class="attr">x</span>:<span class="number">100</span>&#125;&#125;</span><br><span class="line"><span class="keyword">var</span> b = shallowClone(a)</span><br><span class="line"></span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line">a.foo.x = <span class="number">200</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age)  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(b.foo)  <span class="comment">// &#123;x: 200&#125;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="常见的浅拷贝"><a href="#常见的浅拷贝" class="headerlink" title="常见的浅拷贝"></a>常见的浅拷贝</h2><h3 id="拷贝数组"><a href="#拷贝数组" class="headerlink" title="拷贝数组"></a>拷贝数组</h3><ul>
 <li><p><code>slice()</code></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'old'</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">var</span> newArr = arr.slice()</span><br><span class="line">newArr[<span class="number">0</span>] = <span class="string">'new'</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)  <span class="comment">// ["old", 1, 2, 3]</span></span><br><span class="line"><span class="built_in">console</span>.log(newArr)  <span class="comment">// ["new", 1, 2, 3]</span></span><br></pre></td></tr></table></figure>
@@ -244,7 +244,7 @@ var themeMenus = {};
 </blockquote>
 <p>深拷贝实现其实很困难的，需要考虑很多边界问题，比如原型链如何处理、Dom 元素的处理。实际开发者如果确定要用深拷贝，可以使用 <a href="http://lodash.think2011.net/cloneDeep" target="_blank" rel="noopener">lodash</a> 库<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var _ = require(&apos;lodash&apos;)</span><br><span class="line">var obj = &#123;</span><br><span class="line">    a: 1,</span><br><span class="line">    b: &#123;foo: function()&#125;</span><br><span class="line">&#125;</span><br><span class="line">var obj2 = _.cloneDeep(obj)</span><br></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>浅拷被就是再拷贝对象属性时，属性值也是对象的话，拷贝的只是引用，而深拷贝拷贝的是对象。</li>
+<li>浅拷贝就是在拷贝对象属性时，属性值也是对象的话，拷贝的只是引用，而深拷贝拷贝的是对象。</li>
 <li>深拷贝会用到递归，效率低下，能不用则不用。</li>
 </ul>
 

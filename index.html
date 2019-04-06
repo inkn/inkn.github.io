@@ -231,7 +231,7 @@ var a = &#123; age: 1&#125;var b = ab.age = 2console.log(a.age)  // 2
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/29/深入Javascript原理/">深入Javascript原理</a>
+      <a class="article-title" href="/2019/03/29/深入Javascript原理/">手撕代码-JavaScript</a>
     </h1>
   
 
@@ -252,11 +252,11 @@ var a = &#123; age: 1&#125;var b = ab.age = 2console.log(a.age)  // 2
             <a href="/2019/03/29/深入Javascript原理/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(59).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
           </div>
           <div class="entry-summary">
-          call 模拟实现
-更改函数的 this 指向并执行函数。
+          call
+更改函数的 this 指向并执行函数并将结果返回。
 
 
-Function.prototype.myCall = function(context) &#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &lt; arguments.leng...
+Function.prototype.myCall = function(context) &#123;    var context = context || window    context.fn = this    var args = []    for(var i = 1; i &lt; arguments.len...
 
         
           <p class="article-more-link">
@@ -321,7 +321,8 @@ Symbol 是 ES6 中新增的一种原始类型。
 
 
 var s1 = Symbol('s')var s2 = Symbol('s')console.log(s1 == s2)  // falseconsole.log(typeof s1)  // 'symbol'
-Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。Symbol ...
+Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值都是唯一的。  
+Symb...
 
         
           <p class="article-more-link">
@@ -671,7 +672,7 @@ JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型
               <div class="widget-entry-summary">
             
 
-              <h6 style="margin: 0;"><a href="/2019/03/29/深入Javascript原理/">深入Javascript原理</a></h6>
+              <h6 style="margin: 0;"><a href="/2019/03/29/深入Javascript原理/">手撕代码-JavaScript</a></h6>
               <span>三月 29, 2019</span>
             </div>
 

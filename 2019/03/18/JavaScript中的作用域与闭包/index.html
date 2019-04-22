@@ -31,7 +31,7 @@
 <meta property="og:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inknight.cn/pic/img/Ghostblade%20(10).jpg">
-<meta property="og:updated_time" content="2019-03-28T12:17:06.860Z">
+<meta property="og:updated_time" content="2019-04-10T02:41:02.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的作用域、执行上下文与闭包">
 <meta name="twitter:description" content="JavaScript 代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。">
@@ -167,7 +167,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" rel="gallery_cju1whur0001dfkvc200zc96u">
+      <a class="article-gallery-img fancybox" href="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" rel="gallery_cjurrq760001hn8vcxnw2o9f7">
         <img src="https://inknight.cn/pic/img/Ghostblade%20(10).jpg" itemprop="image">
       </a>
     
@@ -349,7 +349,7 @@ var themeMenus = {};
 <p>通过匿名函数实现一个闭包计数器：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> numberCounter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ++num</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
 <p>闭包的缺陷：</p>
 <ul>
-<li>闭包所访问的自由变量会常驻内存增大内存的使用量，使用不当很容易造成内存泄漏。</li>
+<li>闭包所访问的自由变量会常驻内存增大内存的使用量，因此闭包滥用会造成网页性能问题。在老版本浏览器中由于垃圾回收有问题导致内存泄漏。正常使用闭包不会导致内存泄漏。</li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>作用域是定义变量的区域，规定了变量的访问范围，它在函数定义时确定。</li>
@@ -358,7 +358,7 @@ var themeMenus = {};
 <li>函数执行时，作用域链是由函数的 <code>[[scope]]</code> 属性中的变量 + 活动对象中的变量组成的。</li>
 <li>闭包是访问外部作用域的变量的函数。</li>
 <li>闭包可以创建私有属性和方法。</li>
-<li>闭包会造成内除泄露。</li>
+<li>闭包滥用会影响页面性能。</li>
 </ul>
 
       

@@ -14,7 +14,7 @@
   PACE Progress Bar START -->
 
   
-  <title>一语道尽 this | 墨夜</title>
+  <title>this 指向 | 墨夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="基础总结JavaScript">
@@ -25,15 +25,15 @@
   <meta name="description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta name="keywords" content="基础总结,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一语道尽 this">
+<meta property="og:title" content="this 指向">
 <meta property="og:url" content="inknight.cn/2019/03/21/this/index.html">
 <meta property="og:site_name" content="墨夜">
 <meta property="og:description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
-<meta property="og:updated_time" content="2019-04-01T00:53:54.813Z">
+<meta property="og:updated_time" content="2019-05-10T01:01:15.290Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一语道尽 this">
+<meta name="twitter:title" content="this 指向">
 <meta name="twitter:description" content="this 的指向，apply、bind、call 一起搞定~">
 <meta name="twitter:image" content="https://inkn.github.io/pic/img/61687348_p0.jpg">
   
@@ -179,7 +179,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      一语道尽 this
+      this 指向
     </h1>
   
 
@@ -203,18 +203,18 @@ var themeMenus = {};
 <p>this 的指向，apply、bind、call 一起搞定~</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 <strong><code>this</code> 一般是在函数执行时确定的</strong>。</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>this 是在执行函数时，创建的上下文对象中的一个属性，它代表该函数的调用者。所以 <strong><code>this</code> 一般是在函数执行时确定的</strong>。</p>
 <h3 id="this-指向的是谁"><a href="#this-指向的是谁" class="headerlink" title="this 指向的是谁"></a>this 指向的是谁</h3><p>一般情况下，请记住 “<strong>谁调用我，我就代表谁</strong>“。<br>谁调用这个函数，函数中的 this 就指向谁。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'foo'</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo() <span class="comment">// 'window'</span></span><br></pre></td></tr></table></figure>
 <p>执行 <code>foo()</code> 相当于执行 <code>window.foo()</code>(非严格模式) 也就是 <code>window</code> 调用了 foo 函数，所以 foo 函数体内的 <code>this</code> 指向的就是 <code>window</code> 对象。<br>当然如果是在 Node.js 环境下，上述 this 指向的就是 <code>globle</code> 对象了。</p>
 <p>匿名函数中的 this 也是指向全局对象的。</p>
 <p>再看个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.foo()  <span class="comment">// 'a'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo2 = a.foo</span><br><span class="line"></span><br><span class="line">foo2()  <span class="comment">// 'window'</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="改变-this-的指向"><a href="#改变-this-的指向" class="headerlink" title="改变 this 的指向"></a>改变 this 的指向</h3><h4 id="new-实例化对象。"><a href="#new-实例化对象。" class="headerlink" title="new 实例化对象。"></a><code>new</code> 实例化对象。</h4><p>new 运算符做了：申请内存用于储存对象，将 this 指向该对象，执行构造函数代码，返回对象给变量。</p>
+<h3 id="改变-this-的指向"><a href="#改变-this-的指向" class="headerlink" title="改变 this 的指向"></a>改变 this 的指向</h3><h4 id="new-实例化对象。"><a href="#new-实例化对象。" class="headerlink" title="new 实例化对象。"></a><code>new</code> 实例化对象。</h4><p>new 运算符做了：创建一个新对象，将构造函数的 this 指向该对象，执行构造函数代码，如果函数执行结果返回一个对象，就将这个对象返回，否则返回创建的对象。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> User(<span class="string">'小a'</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="this-this"><a href="#this-this" class="headerlink" title="_this = this"></a><code>_this = this</code></h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    foo2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _this = <span class="keyword">this</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(_this.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.foo()  <span class="comment">// 'window'</span></span><br><span class="line">a.foo2()  <span class="comment">// 'a'</span></span><br></pre></td></tr></table></figure>
 <h4 id="apply、call、bind"><a href="#apply、call、bind" class="headerlink" title="apply、call、bind"></a>apply、call、bind</h4><p>apply 与 call 差不多，主要是传参不同，都是将 this 改变并执行函数，而 bind 是将函数返回但没执行。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + x + y)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.foo.call(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>)  <span class="comment">// 'window12'</span></span><br><span class="line">a.foo.apply(<span class="keyword">this</span>, [<span class="number">1</span>, <span class="number">2</span>])  <span class="comment">// 'window12'</span></span><br><span class="line"><span class="keyword">var</span> foo2 = a.foo.bind(<span class="keyword">this</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">foo2()  <span class="comment">// 'window12'</span></span><br></pre></td></tr></table></figure>
-<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数不绑定 this，没有自己的 this ，必须通过作用域链决定其值。也就是 箭头函数中的 this 就是父级作用域中的 this</p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数不绑定 this，没有自己的 this ，必须通过作用域链决定其值。也就是箭头函数中的 this 就是父级作用域中的 this</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'window'</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    name: <span class="string">'a'</span>,</span><br><span class="line">    foo: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;,</span><br><span class="line">    foo2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">a.foo()  <span class="comment">// 'window'</span></span><br><span class="line">a.foo2()  <span class="comment">// 'a'</span></span><br></pre></td></tr></table></figure>
 
       

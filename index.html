@@ -428,7 +428,7 @@ Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/21/this/">一语道尽 this</a>
+      <a class="article-title" href="/2019/03/21/this/">this 指向</a>
     </h1>
   
 
@@ -453,9 +453,9 @@ Symbol 类型通过调用 Symbol() 函数生成，每一个 Symbol 类型的值�
 this 的指向，apply、bind、call 一起搞定~
 
 
-thisthis 是在执行函数时，创建的上下文对象中的一个属性，它允许在调用函数时决定哪个对象是焦点。所以 this 一般是在函数执行时确定的。
+thisthis 是在执行函数时，创建的上下文对象中的一个属性，它代表该函数的调用者。所以 this 一般是在函数执行时确定的。
 this 指向的是谁一般情况下，请记住 “谁调用我，我就代表谁“。谁调用这个函数，函数中的 this 就指向谁。
-var name = 'window'function foo()...
+var name = 'window'function foo() &#123; ...
 
         
           <p class="article-more-link">
@@ -719,7 +719,7 @@ JavaScript 采用词法作用域...
               <div class="widget-entry-summary">
             
 
-              <h6 style="margin: 0;"><a href="/2019/03/21/this/">一语道尽 this</a></h6>
+              <h6 style="margin: 0;"><a href="/2019/03/21/this/">this 指向</a></h6>
               <span>三月 21, 2019</span>
             </div>
 

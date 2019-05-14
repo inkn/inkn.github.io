@@ -227,7 +227,7 @@ JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/03/11/JavaScript中的原型/">集齐 JavaScript 中的继承方式</a>
+      <a class="article-title" href="/2019/03/08/JavaScript中的原型/">JavaScript 中的原型原来是这样的</a>
     </h1>
   
 
@@ -235,8 +235,8 @@ JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型
     
     <div class="article-meta">
       
-	Posted on <a href="/2019/03/11/JavaScript中的原型/" class="article-date">
-	  <time datetime="2019-03-11T01:25:39.000Z" itemprop="datePublished">三月 11, 2019</time>
+	Posted on <a href="/2019/03/08/JavaScript中的原型/" class="article-date">
+	  <time datetime="2019-03-08T00:56:54.000Z" itemprop="datePublished">三月 8, 2019</time>
 	</a>
 
       <!--  ** -->
@@ -245,19 +245,18 @@ JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型
       
         
           <div class="entry-thumbnail">
-            <a href="/2019/03/11/JavaScript中的原型/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(17).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
+            <a href="/2019/03/08/JavaScript中的原型/"><img width="250" height="175" src="https://inknight.cn/pic/img/Ghostblade%20(6).jpg" class="attachment-thumb-featured size-thumb-featured wp-post-image" alt=""></a>
           </div>
           <div class="entry-summary">
-          
-JavaScript 中的继承是以原型为基础的，所以首先要弄明白原型，在上一篇文章「JavaScript 中的原型原来是这样的」里应该会有所获。
+          什么是原型
+原型其实就是一个特殊的对象，在声明函数的时候自动创建的。
 
-继承是什么在传统面向对象语言( c++, c#, java… )中，继承是：使用已存在的类作为基础建立新的类的技术。我们把已存在的类称之为父类，新的类称之为子类。继承可以使得子类具有父类的各种属性和方法，因此可以避免写重复代码提高开发效率。
 
-...
+比如，我们现在声明一个构造函数 A ，除了会申请保存函数的内存空间，还会额外申请一个内存空间，用于存储构造函数 A 的原型对象。所有函数中(Function.prototype.bind 除外)默认都有一个 prototype 的属性，它保存了函数的原型对象的地址(引用)(也就是它指向了原型对象)。而在原型对象中默认有...
 
         
           <p class="article-more-link">
-            <a href="/2019/03/11/JavaScript中的原型/#more">阅读全文</a>
+            <a href="/2019/03/08/JavaScript中的原型/#more">阅读全文</a>
           </p>
         </div>
       
